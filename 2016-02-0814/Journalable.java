@@ -2,7 +2,7 @@
  * Created by Adel on 08.02.2016.
  */
 public interface Journalable {
-    void saveEstimate(int estimate, Subject subject, Student student);
-    void deleteEstimate(int estimate, Subject subject, Student student);
-    void showEstimate(int estimate, Subject subject, Student student);
+    void saveData(int data, Subject subject, Student student);
+    void deleteData(int data, Subject subject, Student student);
+    void showData(int data, Subject subject, Student student);
 }

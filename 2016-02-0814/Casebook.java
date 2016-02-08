@@ -7,17 +7,17 @@ public class Casebook implements Journalable{
     private int missingNumber;
 
     @Override
-    public void saveEstimate(int estimate, Subject subject, Student student) {
+    public void saveData(int data, Subject subject, Student student) {
 
     }
 
     @Override
-    public void deleteEstimate(int estimate, Subject subject, Student student) {
+    public void deleteData(int data, Subject subject, Student student) {
 
     }
 
     @Override
-    public void showEstimate(int estimate, Subject subject, Student student) {
+    public void showData(int data, Subject subject, Student student) {
 
     }
 }
