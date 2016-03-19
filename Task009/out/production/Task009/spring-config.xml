@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <bean id="cm" class="ru.kpfu.itis.java.Gilmanova.Classes.ComplexMatrix2x2"/>
+
+       <bean id="cn" class="ru.kpfu.itis.java.Gilmanova.Classes.ComplexNumber">
+              <property name="im" value="0"/>
+              <property name="re" value="0"/>
+       </bean>
+
+       <bean id="cv" class="ru.kpfu.itis.java.Gilmanova.Classes.ComplexVector2D"/>
+
+
+</beans>
