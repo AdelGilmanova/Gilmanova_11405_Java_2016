@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="teacher" class="ru.kpfu.itis.java.Gilmanova.Classes.Teacher">
+        <property name="FIO" value="Садыков Жаудат Назипович"/>
+        <property name="workExperience" value="25"/>
+        <property name="subject" ref="history"/>
+    </bean>
+
+    <bean id="director" class="ru.kpfu.itis.java.Gilmanova.Classes.Director">
+        <property name="FIO" value="Тигина Ольга Александровна"/>
+        <property name="subject" ref="russian"/>
+        <property name="workExperience" value="25"/>
+    </bean>
+
+    <bean id="student" class="ru.kpfu.itis.java.Gilmanova.Classes.Student">
+        <property name="FIO" value="Валиев Ильдар Маратович"/>
+        <property name="diary" ref="diary"/>
+        <property name="studentsClass" ref="studentsClass"/>
+    </bean>
+
+    <bean id="cook" class="ru.kpfu.itis.java.Gilmanova.Classes.Cook">
+        <property name="FIO" value="Виктор Петрович Баринов"/>
+        <property name="schedule" ref="schedule"/>
+        <property name="workExperience" value="20"/>
+    </bean>
+
+
+
+    <bean id="history" class="ru.kpfu.itis.java.Gilmanova.Classes.Subject">
+        <property name="profile" value="history"/>
+        <property name="teacher" ref="teacher"/>
+        <property name="hours" value="32"/>
+    </bean>
+    <bean id="russian" class="ru.kpfu.itis.java.Gilmanova.Classes.Subject">
+        <property name="profile" value="russian"/>
+        <property name="teacher" ref="director"/>
+        <property name="hours" value="32"/>
+    </bean>
+
+    <bean id="diary" class="ru.kpfu.itis.java.Gilmanova.Classes.Diary">
+        <property name="student" ref="student"/>
+        <property name="schedule" ref="schedule"/>
+        <property name="subjectList">
+            <list>
+                <ref bean="history"/>
+                <ref bean="russian"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="schedule" class="ru.kpfu.itis.java.Gilmanova.Classes.Schedule">
+        <property name="subjectList">
+            <list>
+                <ref bean="russian"/>
+                <ref bean="history"/>
+            </list>
+        </property>
+        <property name="studentsClass" ref="studentsClass"/>
+        <property name="weekday" value="monday"/>
+    </bean>
+
+    <bean id="studentsClass" class="ru.kpfu.itis.java.Gilmanova.Classes.StudentsClass">
+        <property name="name" value="11A"/>
+        <property name="teacher" ref="teacher"/>
+        <property name="students">
+            <list>
+                <ref bean="student"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="casebook" class="ru.kpfu.itis.java.Gilmanova.Classes.Casebook">
+        <property name="missingNumber" value="12"/>
+        <property name="schedule" ref="schedule"/>
+        <property name="studentsClass" ref="studentsClass"/>
+    </bean>
+
+    <bean id="journal" class="ru.kpfu.itis.java.Gilmanova.Classes.Journal">
+        <property name="teacher" ref="teacher"/>
+        <property name="studentsClass" ref="studentsClass"/>
+        <property name="subjectList">
+            <list>
+                <ref bean="history"/>
+                <ref bean="russian"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
