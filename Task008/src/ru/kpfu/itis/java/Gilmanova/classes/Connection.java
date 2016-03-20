@@ -28,7 +28,7 @@ public class Connection implements Runnable {
     public void run() {
         try {
             BufferedReader bis = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //сказать клиенту, что игра началась
+            //СЃРєР°Р·Р°С‚СЊ РєР»РёРµРЅС‚Сѓ, С‡С‚Рѕ РёРіСЂР° РЅР°С‡Р°Р»Р°СЃСЊ
             for (Map.Entry<String, Connection[]> entry : Server.players.entrySet()) {
                 if ((entry.getValue()[0] == this && entry.getValue()[1] != null) ||
                         (entry.getValue()[1] == this && entry.getValue()[0] != null)) {
@@ -41,9 +41,9 @@ public class Connection implements Runnable {
             }
 
             while (true) {
-                String clientAnswer = bis.readLine(); //считывет ответ клиента
+                String clientAnswer = bis.readLine(); //СЃС‡РёС‚С‹РІРµС‚ РѕС‚РІРµС‚ РєР»РёРµРЅС‚Р°
                 if (clientAnswer.equals("end")) {
-                    //удаление комнаты
+                    //СѓРґР°Р»РµРЅРёРµ РєРѕРјРЅР°С‚С‹
                     if (Server.players.containsKey(roomName)) {
                         Connection[] con = Server.players.get(roomName);
                         if (con[0] != null) {

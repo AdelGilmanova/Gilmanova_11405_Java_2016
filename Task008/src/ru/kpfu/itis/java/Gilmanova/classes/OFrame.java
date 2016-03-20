@@ -13,7 +13,7 @@ import java.net.Socket;
 /**
  * Created by Adel on 28.10.2015.
  */
-//Игрок, играющий ноликами
+//РРіСЂРѕРє, РёРіСЂР°СЋС‰РёР№ РЅРѕР»РёРєР°РјРё
 public class OFrame extends JFrame {
     private Socket socket;
     PrintWriter bos;
@@ -31,7 +31,7 @@ public class OFrame extends JFrame {
         socket = new Socket(ip, 3456);
         bos = new PrintWriter(socket.getOutputStream(), true);
 
-        //отправить инфу о клиенте
+        //РѕС‚РїСЂР°РІРёС‚СЊ РёРЅС„Сѓ Рѕ РєР»РёРµРЅС‚Рµ
         bos.println("second");
         this.clientName = clientName;
         if (clientName == null) bos.println("O");
@@ -85,7 +85,7 @@ public class OFrame extends JFrame {
             }
         });
 
-        JLabel msg = new JLabel("Ожидайте...");
+        JLabel msg = new JLabel("РћР¶РёРґР°Р№С‚Рµ...");
         waiting.add(msg);
         waiting.setVisible(true);
         waiting.setBounds(500, 100, 400, 300);
@@ -141,7 +141,7 @@ public class OFrame extends JFrame {
                         JButton jb1 = (JButton) e.getSource();
                         int x = (jb1.getX() + (buttonSize / 2)) / buttonSize;
                         int y = (jb1.getY() + (buttonSize / 2)) / buttonSize;
-                        bos.println("O, " + x + ", " + y); //на сервер отправляются координаты нажатой кнопки o
+                        bos.println("O, " + x + ", " + y); //РЅР° СЃРµСЂРІРµСЂ РѕС‚РїСЂР°РІР»СЏСЋС‚СЃСЏ РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР°Р¶Р°С‚РѕР№ РєРЅРѕРїРєРё o
                         if (jb1.isEnabled()) {
                             jb1.setText("O");
                             buttons[y][x] = jb1;

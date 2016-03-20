@@ -1,19 +1,16 @@
-package ru.kpfu.itis.java.Gilmanova.Classes;
+package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by Adel on 08.02.2016.
  */
-@Component
 public class Schedule {
     @Autowired
     private StudentsClass studentsClass;
-    @Value("monday")
+
     private String weekday;
     @Autowired
     private List<Subject> subjectList;
@@ -49,7 +46,6 @@ public class Schedule {
         return "Schedule{" +
                 "studentsClass=" + studentsClass +
                 ", weekday='" + weekday + '\'' +
-                ", subjectList=" + subjectList +
                 '}';
     }
 }

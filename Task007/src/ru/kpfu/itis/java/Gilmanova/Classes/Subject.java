@@ -1,18 +1,13 @@
-package ru.kpfu.itis.java.Gilmanova.Classes;
+package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Teacherable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Teacherable;
 
 /**
  * Created by Adel on 08.02.2016.
  */
-@Component
-@Qualifier("history")
 public class Subject {
-    @Value("history")
     private String profile;
 
     @Autowired

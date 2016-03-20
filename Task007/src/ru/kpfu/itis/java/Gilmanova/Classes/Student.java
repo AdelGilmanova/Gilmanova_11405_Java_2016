@@ -1,20 +1,16 @@
-package ru.kpfu.itis.java.Gilmanova.Classes;
+package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Studentable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Studentable;
 
 import java.util.Date;
 
 /**
  * Created by Adel on 08.02.2016.
  */
-@Component
-@Qualifier("valiev")
+
 public class Student implements Studentable {
-    @Value("Валиев Ильдар Маратович")
     private String FIO;
 
     @Autowired

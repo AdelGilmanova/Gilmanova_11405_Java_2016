@@ -1,9 +1,9 @@
-package ru.kpfu.itis.java.Gilmanova.Classes;
+package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Cookable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Cookable;
 
 import java.util.Date;
 

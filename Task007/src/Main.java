@@ -1,9 +1,9 @@
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.kpfu.itis.java.Gilmanova.Classes.*;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Cookable;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Journalable;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Studentable;
+import ru.kpfu.itis.java.Gilmanova.classes.*;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Cookable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Journalable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Studentable;
 
 import java.util.Date;
 
@@ -20,13 +20,13 @@ public class Main {
         Journalable journal = ac.getBean(Journal.class);
         Journalable casebook = ac.getBean(Casebook.class);
         StudentsClass studentsClass = ac.getBean(StudentsClass.class);
-        Subject subject = ac.getBean(Subject.class);
+        Subject subject = ac.getBean("russian", Subject.class);
         Schedule schedule = ac.getBean(Schedule.class);
         Diary diary = ac.getBean(Diary.class);
         Date date = new Date();
 
         System.out.println(director.changeWages(teacher, 50000));
-        System.out.println(director.dismiss(teacher, "Опоздание"));
+        System.out.println(director.dismiss(teacher, "РћРїРѕР·РґР°РЅРёРµ"));
         System.out.println(director.expel((Student) student, subject, 2));
         System.out.println(director.pullEstimate(5, subject, (Student) student));
         System.out.println(director.spendLine(studentsClass, date, 100));

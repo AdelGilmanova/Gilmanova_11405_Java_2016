@@ -1,8 +1,9 @@
-package ru.kpfu.itis.java.Gilmanova.Classes;
+package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Journalable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Journalable;
 
 import java.util.List;
 
@@ -12,9 +13,12 @@ import java.util.List;
 @Component
 public class Journal implements Journalable {
     @Autowired
+    @Qualifier("teacher")
     private Teacher teacher;
+
     @Autowired
     private StudentsClass studentsClass;
+
     @Autowired
     private List<Subject> subjectList;
 

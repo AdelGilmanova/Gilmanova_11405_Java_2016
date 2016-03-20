@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 /**
  * Created by Adel on 28.10.2015.
  */
-//Игрок, играющий крестиками
+//РРіСЂРѕРє, РёРіСЂР°СЋС‰РёР№ РєСЂРµСЃС‚РёРєР°РјРё
 public class ClientX implements Runnable {
     XFrame frame;
     Thread thread;
@@ -22,10 +22,10 @@ public class ClientX implements Runnable {
     public void run() {
         try {
             BufferedReader bis = new BufferedReader(new InputStreamReader(frame.getSocket().getInputStream()));
-            String answer = bis.readLine(); //считывает ответ сервера
+            String answer = bis.readLine(); //СЃС‡РёС‚С‹РІР°РµС‚ РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
             frame.startGame(answer);
             while (true) {
-                answer = bis.readLine(); //считывает ответ сервера
+                answer = bis.readLine(); //СЃС‡РёС‚С‹РІР°РµС‚ РѕС‚РІРµС‚ СЃРµСЂРІРµСЂР°
                 if (answer.equals("end")) {
                     System.exit(-1);
                 } else frame.printOnFrame(answer);

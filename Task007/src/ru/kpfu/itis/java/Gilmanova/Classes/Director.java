@@ -1,23 +1,22 @@
-package ru.kpfu.itis.java.Gilmanova.Classes;
+package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Directorable;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Teacherable;
+import org.springframework.beans.factory.annotation.Qualifier;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Directorable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Teacherable;
 
 import java.util.Date;
 
 /**
  * Created by Adel on 08.02.2016.
  */
-@Component
 public class Director implements Directorable, Teacherable {
-    @Value("Тигина Ольга Александровна")
     private String FIO;
+
     @Autowired
+    @Qualifier("russian")
     private Subject subject;
-    @Value("25")
+
     private Double workExperience;
 
     public Director() {

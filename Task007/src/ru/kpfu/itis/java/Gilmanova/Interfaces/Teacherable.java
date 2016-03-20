@@ -1,8 +1,8 @@
-package ru.kpfu.itis.java.Gilmanova.Interfaces;
+package ru.kpfu.itis.java.Gilmanova.interfaces;
 
-import ru.kpfu.itis.java.Gilmanova.Classes.Student;
-import ru.kpfu.itis.java.Gilmanova.Classes.StudentsClass;
-import ru.kpfu.itis.java.Gilmanova.Classes.Subject;
+import ru.kpfu.itis.java.Gilmanova.classes.Student;
+import ru.kpfu.itis.java.Gilmanova.classes.StudentsClass;
+import ru.kpfu.itis.java.Gilmanova.classes.Subject;
 
 /**
  * Created by Adel on 08.02.2016.

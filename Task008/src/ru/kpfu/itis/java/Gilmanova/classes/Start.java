@@ -1,8 +1,10 @@
 package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.kpfu.itis.java.Gilmanova.JavaConfig;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -20,31 +21,44 @@ import java.util.ArrayList;
 /**
  * Created by Adel on 20.12.2015.
  */
-@SuppressWarnings("SpringJavaAutowiringInspection")
 public class Start {
     @Autowired
+    @Qualifier("ipField")
+    public JTextField ipField;
+
+    @Autowired
+    @Qualifier("socket")
     public Socket socket;
+
     @Autowired
+    @Qualifier("bos")
     public PrintWriter bos;
+
     @Autowired
+    @Qualifier("bis")
     public BufferedReader bis;
+
     @Autowired
+    @Qualifier("jframe")
     public JFrame jframe;
+
     @Autowired
+    @Qualifier("jframe")
     public JFrame ipFrame;
+
     public ArrayList<XFrame> xFrames = new ArrayList<>();
     public ArrayList<OFrame> oFrames = new ArrayList<>();
 
-    public void start() {
+    public Start(){ }
+
+    public void startGame() {
         ipFrame.dispose();
         jframe.setVisible(true);
     }
 
-    public Start() throws IOException {
-        jframe = new JFrame("Gomoku");
-        ipFrame = new JFrame();
+    public void start(){
+        jframe.setTitle("Gomoku");
         JLabel jLabel1 = new JLabel("Введите IP");
-        final JTextField ipField = new JTextField();
         JButton insertIP = new JButton("OK");
         ipFrame.add(ipField);
         ipFrame.add(insertIP);
@@ -78,16 +92,9 @@ public class Start {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (ipField.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(jframe,
-                                "Нужно ввести IP");
-                    } else {
-                        socket = new Socket(ipField.getText(), 3456);
-                        bos = new PrintWriter(socket.getOutputStream(), true);
-                        bis = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                        createStartFrame(ipField.getText());
-                        start();
-                    }
+                    socket = new Socket(ipField.getText(), 3456);
+                    createStartFrame(ipField.getText());
+                    startGame();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -267,7 +274,6 @@ public class Start {
                     for (String room : rooms) {
                         listModel.addElement(room);
                     }
-                    //final JList list = new JList(listModel);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -346,8 +352,8 @@ public class Start {
     }
 
     public static void main(String[] args) throws IOException {
-        //new Start();
-        ApplicationContext ac = new ClassPathXmlApplicationContext("spring-config.xml");
-        ac.getBean("start");
+        ApplicationContext ac = new AnnotationConfigApplicationContext(JavaConfig.class);
+        Start game= ac.getBean(Start.class);
+        game.start();
     }
 }

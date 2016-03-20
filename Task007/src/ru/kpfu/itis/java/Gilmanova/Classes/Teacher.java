@@ -1,25 +1,20 @@
-package ru.kpfu.itis.java.Gilmanova.Classes;
+package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Journalable;
-import ru.kpfu.itis.java.Gilmanova.Interfaces.Teacherable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Journalable;
+import ru.kpfu.itis.java.Gilmanova.interfaces.Teacherable;
 
 /**
  * Created by Adel on 08.02.2016.
  */
-@Component
 public class Teacher implements Teacherable, Journalable {
-    @Value("Садыков Жаудат Назипович")
     private String FIO;
 
     @Autowired
     @Qualifier("history")
     private Subject subject;
 
-    @Value("25")
     private Double workExperience;
 
     public Teacher() {}

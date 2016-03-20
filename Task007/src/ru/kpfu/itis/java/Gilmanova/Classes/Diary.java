@@ -1,19 +1,14 @@
-package ru.kpfu.itis.java.Gilmanova.Classes;
+package ru.kpfu.itis.java.Gilmanova.classes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by Adel on 08.02.2016.
  */
-@Component
-@Qualifier("diary")
 public class Diary {
     @Autowired
-    @Qualifier("valiev")
     private Student student;
     @Autowired
     private List<Subject> subjectList;

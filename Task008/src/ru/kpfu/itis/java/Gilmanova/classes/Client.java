@@ -28,12 +28,12 @@ public class Client implements Runnable {
         try {
             BufferedReader bis = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter bos = new PrintWriter(socket.getOutputStream(), true);
-            //отправляю комнаты клиенту
+            //РѕС‚РїСЂР°РІР»СЏСЋ РєРѕРјРЅР°С‚С‹ РєР»РёРµРЅС‚Сѓ
             bos.println(getRooms());
             while (true) {
                 String action = bis.readLine();
                 String[] answerPath = action.split(" ");
-                if (action.equals("getRooms")) { //клиен присылает запрос на получение списка комнат
+                if (action.equals("getRooms")) { //РєР»РёРµРЅ РїСЂРёСЃС‹Р»Р°РµС‚ Р·Р°РїСЂРѕСЃ РЅР° РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РєРѕРјРЅР°С‚
                     bos.println(getRooms());
                 } else if (answerPath[0].equals("check")) {
                     String name = action.substring(6, action.length());
@@ -43,7 +43,7 @@ public class Client implements Runnable {
                     else{
                         bos.println("no");
                     }
-                } else { //клиент присылает имя комнаты, в которой бы хотел играть
+                } else { //РєР»РёРµРЅС‚ РїСЂРёСЃС‹Р»Р°РµС‚ РёРјСЏ РєРѕРјРЅР°С‚С‹, РІ РєРѕС‚РѕСЂРѕР№ Р±С‹ С…РѕС‚РµР» РёРіСЂР°С‚СЊ
                     boolean check = false;
                     if (Server.players.containsKey(action)) {
                         Connection[] connections = Server.players.get(action);
@@ -69,7 +69,7 @@ public class Client implements Runnable {
     }
 
     public String getRooms() {
-        //нужно возвращать только свободные комнаты
+        //РЅСѓР¶РЅРѕ РІРѕР·РІСЂР°С‰Р°С‚СЊ С‚РѕР»СЊРєРѕ СЃРІРѕР±РѕРґРЅС‹Рµ РєРѕРјРЅР°С‚С‹
         String rooms = "";
         for (Map.Entry<String, Connection[]> entry : Server.players.entrySet()) {
             if (entry.getValue()[0] == null || entry.getValue()[1] == null)
