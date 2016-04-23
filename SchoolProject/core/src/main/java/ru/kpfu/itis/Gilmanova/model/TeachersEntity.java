@@ -2,6 +2,7 @@ package ru.kpfu.itis.Gilmanova.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 /**
  * Created by Adel on 07.04.2016.
@@ -16,9 +17,9 @@ public class TeachersEntity {
     private String gender;
     private Date birthday;
     private String photo;
+    private List<TeacherObjectEntity> teacher_object;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -88,34 +89,15 @@ public class TeachersEntity {
         this.photo = photo;
     }
 
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
-        result = 31 * result + (gender != null ? gender.hashCode() : 0);
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (photo != null ? photo.hashCode() : 0);
-        return result;
+    @OneToMany(cascade = CascadeType.REFRESH,
+            fetch = FetchType.LAZY,
+            mappedBy = "teachersByTeacherId",
+            targetEntity = TeacherObjectEntity.class)
+    public List<TeacherObjectEntity> getTeacher_object() {
+        return teacher_object;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TeachersEntity that = (TeachersEntity) o;
-
-        if (id != that.id) return false;
-        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        if (secondName != null ? !secondName.equals(that.secondName) : that.secondName != null) return false;
-        if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
-        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
-        if (photo != null ? !photo.equals(that.photo) : that.photo != null) return false;
-
-        return true;
+    public void setTeacher_object(List<TeacherObjectEntity> teacher_object) {
+        this.teacher_object = teacher_object;
     }
 }

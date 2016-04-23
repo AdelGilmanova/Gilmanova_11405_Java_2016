@@ -13,14 +13,13 @@ import java.util.List;
  * Created by Adel on 31.03.2016.
  */
 public class MyUserDetail implements UserDetails {
-
     /**
      * запись о пользователе из БД
      */
-    private UsersEntity userInfo;
+    private UsersEntity userEntity;
 
-    public MyUserDetail(UsersEntity userInfo) {
-        this.userInfo = userInfo;
+    public MyUserDetail(UsersEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     /**
@@ -29,7 +28,7 @@ public class MyUserDetail implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(userInfo.getRole()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(userEntity.getRole()));
         return grantedAuthorities;
     }
 
@@ -38,7 +37,7 @@ public class MyUserDetail implements UserDetails {
      */
     @Override
     public String getPassword() {
-        return userInfo.getHashPass();
+        return userEntity.getHashPass();
     }
 
     /**
@@ -46,7 +45,7 @@ public class MyUserDetail implements UserDetails {
      */
     @Override
     public String getUsername() {
-        return userInfo.getUsername();
+        return userEntity.getUsername();
     }
 
     /**
@@ -78,14 +77,14 @@ public class MyUserDetail implements UserDetails {
      */
     @Override
     public boolean isEnabled() {
-        return userInfo.getEnable();
+        return userEntity.getEnable();
     }
 
-    public UsersEntity getUserInfo() {
-        return userInfo;
+    public UsersEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setUserInfo(UsersEntity userInfo) {
-        this.userInfo = userInfo;
+    public void setUserEntity(UsersEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

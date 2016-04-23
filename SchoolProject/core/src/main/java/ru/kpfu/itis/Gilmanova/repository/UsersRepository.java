@@ -22,13 +22,13 @@ public class UsersRepository {
      */
     public UsersEntity getUser(String login) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(UsersEntity.class);
-        return (UsersEntity) crit.add(Restrictions.eq("login", login)).uniqueResult();
+        return (UsersEntity) crit.add(Restrictions.eq("username", login)).uniqueResult();
     }
 
     /*
      * Добавление нового пользователя в бд
      */
-    public Integer addUser(String userName, String login, String hash_pass, String key) throws NoSuchAlgorithmException {
+    public Integer addUser(String userName, String hash_pass) throws NoSuchAlgorithmException {
         UsersEntity user = new UsersEntity(userName, hash_pass, true, "ROLE_STUDENT");
         sessionFactory.getCurrentSession().save(user);
         return user.getId();

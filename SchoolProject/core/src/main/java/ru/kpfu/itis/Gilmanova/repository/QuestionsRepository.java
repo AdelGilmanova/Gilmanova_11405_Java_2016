@@ -7,7 +7,6 @@ import ru.kpfu.itis.Gilmanova.model.QuestionsEntity;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Calendar;
 
 /**
  * Created by Adel on 07.04.2016.
@@ -18,18 +17,11 @@ public class QuestionsRepository {
     private SessionFactory sessionFactory;
 
     /*
-     * Добавление вопроса в бд
+     * Р”РѕР±Р°РІР»РµРЅРёРµ РІРѕРїСЂРѕСЃР° РІ Р±Рґ
      */
     @SuppressWarnings("unchecked")
-    public void addQuestions(String theme, String text, String email, String name) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -1);
-        String time = calendar.get(Calendar.HOUR_OF_DAY) + ":" +
-                calendar.get(Calendar.MINUTE)+ ":" +calendar.get(Calendar.SECOND);
-        String date = calendar.get(Calendar.YEAR) + "-" +
-                calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.DAY_OF_MONTH);
-
-        QuestionsEntity questionsEntity = new QuestionsEntity(theme, text, email, name, Time.valueOf(time), Date.valueOf(date));
+    public void addQuestions(String theme, String text, String email, String name, Time time, Date date) {
+        QuestionsEntity questionsEntity = new QuestionsEntity(theme, text, email, name, time, date);
         sessionFactory.getCurrentSession().save(questionsEntity);
     }
 }

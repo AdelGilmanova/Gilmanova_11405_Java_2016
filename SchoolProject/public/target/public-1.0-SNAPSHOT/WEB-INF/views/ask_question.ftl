@@ -1,5 +1,5 @@
 <#include "templates/main_template.ftl">
-<@main_template scripts=["js/ask_question.js"]/>
+<@main_template scripts=["ask_question.js"]/>
 
 <#macro left_block>
 <div class="question-block">

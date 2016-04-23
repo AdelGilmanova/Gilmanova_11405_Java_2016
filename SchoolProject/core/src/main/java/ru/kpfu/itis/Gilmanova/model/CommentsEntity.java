@@ -16,8 +16,17 @@ public class CommentsEntity {
     private Time time;
     private Date date;
 
+    public CommentsEntity(String userName, String content, Time time, Date date) {
+        this.userName = userName;
+        this.content = content;
+        this.time = time;
+        this.date = date;
+    }
+
+    public CommentsEntity() {
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -67,29 +76,5 @@ public class CommentsEntity {
         this.date = date;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        return result;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CommentsEntity that = (CommentsEntity) o;
-
-        if (id != that.id) return false;
-        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        if (content != null ? !content.equals(that.content) : that.content != null) return false;
-        if (time != null ? !time.equals(that.time) : that.time != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-
-        return true;
-    }
 }

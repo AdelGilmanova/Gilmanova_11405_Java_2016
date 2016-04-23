@@ -1,6 +1,7 @@
 package ru.kpfu.itis.Gilmanova.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Adel on 07.04.2016.
@@ -10,10 +11,9 @@ import javax.persistence.*;
 public class ObjectsEntity {
     private int id;
     private String object;
-    private TeachersEntity teachersByTeacherId;
+    private List<TeacherObjectEntity> teacher_object;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -33,33 +33,15 @@ public class ObjectsEntity {
         this.object = object;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (object != null ? object.hashCode() : 0);
-        return result;
+    @OneToMany(cascade = CascadeType.REFRESH,
+            fetch = FetchType.LAZY,
+            mappedBy = "objectsEntity",
+            targetEntity = TeacherObjectEntity.class)
+    public List<TeacherObjectEntity> getTeacher_object() {
+        return teacher_object;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id", nullable = false)
-    public TeachersEntity getTeachersByTeacherId() {
-        return teachersByTeacherId;
-    }
-
-    public void setTeachersByTeacherId(TeachersEntity teachersByTeacherId) {
-        this.teachersByTeacherId = teachersByTeacherId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ObjectsEntity that = (ObjectsEntity) o;
-
-        if (id != that.id) return false;
-        if (object != null ? !object.equals(that.object) : that.object != null) return false;
-
-        return true;
+    public void setTeacher_object(List<TeacherObjectEntity> teacher_object) {
+        this.teacher_object = teacher_object;
     }
 }

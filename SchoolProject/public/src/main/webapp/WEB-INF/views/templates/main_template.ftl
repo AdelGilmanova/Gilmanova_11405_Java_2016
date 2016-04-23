@@ -14,7 +14,7 @@
     <script src="/resources/js/jquery-2.1.4.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
     <#list scripts as js>
-        <script src="/resources/js/mine${js}" type="text/javascript" defer></script>
+        <script src="/resources/js/mine/${js}" type="text/javascript" defer></script>
     </#list>
 </head>
 <body>

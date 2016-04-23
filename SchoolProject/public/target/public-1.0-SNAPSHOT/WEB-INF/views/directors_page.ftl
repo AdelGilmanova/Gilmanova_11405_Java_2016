@@ -1,5 +1,5 @@
 <#include "templates/main_template.ftl">
-<@main_template scripts=["js/directors_page.js"]/>
+<@main_template scripts=["directors_page.js"]/>
 
 <#macro left_block>
     <div class="cabinet-navigation opacity">
@@ -17,7 +17,18 @@
 <#macro center_block></#macro>
 
 <#macro right_block>
-<#include "templates/teachers_info.ftl">
+<div class="cabinet-information opacity">
+    <span class="photo"><img src="${(teacher.getPhoto())!}" width="150" height="150" alt="photo"/></span>
+    <h1 align="center">Личный кабинет</h1>
+    <h2>Моя анкета</h2>
+    <p>Имя: ${(teacher.getLast_name())!} ${(teacher.getFirst_name())!} ${(teacher.getSecond_name())!}</p>
+    <p>Логин: ${(login)!}</p>
+    <p>Должность: Директор</p>
+    <p>Дата рождения: ${(teacher.getBirthday())!}</p>
+    <p>Пол: ${(teacher.getGender())!}</p>
+    <p>Школа: Муниципальное бюджетное общеобразовательное учреждение «Гимназия №122 имени Ж.А. Зайцевой» Московского
+        района г.Казани</p>
+</div>
 </#macro>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

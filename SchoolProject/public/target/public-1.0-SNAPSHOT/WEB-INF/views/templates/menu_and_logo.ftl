@@ -9,5 +9,6 @@
     <span><a href="/information">О Гимназии</a></span>
     <span><a href="/for_parents">Родителям</a></span>
     <span><a href="/ask">Приемная директора</a></span>
+    <span><a href="/comments">Отзывы</a></span>
 </div>
 

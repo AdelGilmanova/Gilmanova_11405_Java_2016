@@ -51,13 +51,14 @@
             <list>
                 <value>ru.kpfu.itis.Gilmanova.model.ClassroomteachersEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.CommentsEntity</value>
-                <value>ru.kpfu.itis.Gilmanova.model.Estimations1HalfEntity</value>
-                <value>ru.kpfu.itis.Gilmanova.model.Estimations2HalfEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.ObjectsEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.QuestionsEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.StudentsEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.TeachersEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.UsersEntity</value>
+                <value>ru.kpfu.itis.Gilmanova.model.EstimationsEntity</value>
+                <value>ru.kpfu.itis.Gilmanova.model.StudentObjectTeacherEntity</value>
+                <value>ru.kpfu.itis.Gilmanova.model.TeacherObjectEntity</value>
             </list>
         </property>
     </bean>

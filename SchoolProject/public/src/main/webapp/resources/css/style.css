@@ -34,7 +34,7 @@ body {
 }
 
 .menu-part span {
-    margin: 75px;
+    margin: 55px;
 }
 
 .main-block {
@@ -87,7 +87,7 @@ body {
     background-color: white;
     padding: 0px 35px 0px 60px;
     text-align: right;
-    opacity: 0.8; /*чтобы форма была прозрачной*/
+    opacity: 0.8; /*пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
 
 }
 
@@ -143,34 +143,18 @@ a:hover {
     color: black;
 }
 
-.order-block {
+.comment-block {
     display: inline-block;
     vertical-align: top;
+    position: relative;
     margin-left: 20px;
     width: 650px;
-    height: 400px;
     background-color: white;
-    padding: 0px 60px;
+    padding: 0px 30px 20px;
+    text-align: justify;
     opacity: 0.8;
 }
 
-.order-news-block {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 20px;
-    width: 250px;
-    height: 400px;
-    background-color: white;
-    padding: 0px 20px;
-    text-align: justify;
-}
-
-.order-theme {
-    background: url(/resources/images/st.jpg) no-repeat;
-    background-attachment: fixed;
-    background-size: 100%;
-    margin: 0px;
-}
 
 .journal-block {
     vertical-align: top;
@@ -259,4 +243,14 @@ hr {
 .delete-block {
     position: absolute;
     right: 50px;
+}
+
+#write_comment {
+    text-align: right;
+    cursor: pointer;
+}
+
+#hidden-block {
+    display: none;
+    text-align: right;
 }

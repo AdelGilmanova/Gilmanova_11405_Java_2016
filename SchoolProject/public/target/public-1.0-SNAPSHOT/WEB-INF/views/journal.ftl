@@ -1,44 +1,63 @@
+<#-- @ftlvariable name="table" type="java.util.List<ru.kpfu.itis.Gilmanova.model.EstimationsEntity>" -->
+<#-- @ftlvariable name="objects" type="java.util.List<ru.kpfu.itis.Gilmanova.model.ObjectsEntity>" -->
+<#-- @ftlvariable name="object" type="ru.kpfu.itis.Gilmanova.model.ObjectsEntity" -->
+<#-- @ftlvariable name="teacher" type="ru.kpfu.itis.Gilmanova.model.TeachersEntity"-->
 <#include "templates/main_template.ftl">
-<@main_template scripts=["js/journal.js"]/>
+<@main_template scripts=["journal.js"]/>
 
 <#macro left_block></#macro>
 
 <#macro center_block>
-    <div class="journal-block">
-        <h3><a href="/teacher" class="cabinet-link">Личный кабинет</a> - Журнал</h3>
+<div class="journal-block">
+    <h3><a href="/teacher" class="cabinet-link">Личный кабинет</a> - Журнал</h3>
 
-        <p>Преподаватель: ${(teacher.getLast_name())!} ${(teacher.getFirst_name())!} ${(teacher.getSecond_name())!}</p>
-        <p>Предмет: ${(object)!}</p>
-        <p>Класс: ${(class)!} </p>
-        <p>Полугодие: ${(half)!} </p>
-    <#--${(msg)!}-->
-        <form name="form" action="/journal" method="get">
-            <input type="hidden" name="cl" value="11А">
-            <input type="hidden" name="half" value="1">
+    <p>Преподаватель: ${(teacher.getLastName())!} ${(teacher.getFirstName())!} ${(teacher.getSecondName())!}</p>
 
-            <div class="dropdown inline">
-                <button class="dropdown-toggle" data-toggle="dropdown">Класс
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="cursor" data-target="#" onClick="document.form.cl.value='11А'">11А</a></li>
-                    <li><a class="cursor" data-target="#" onClick="document.form.cl.value='11Б'">11Б</a></li>
-                    <li><a class="cursor" data-target="#" onClick="document.form.cl.value='11В'">11В</a></li>
-                    <li><a class="cursor" data-target="#" onClick="document.form.cl.value='11Г'">11Г</a></li>
-                </ul>
-            </div>
-            <div class="dropdown inline">
-                <button class="dropdown-toggle" data-toggle="dropdown">Полугодие
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="cursor" data-target="#" onClick="document.form.half.value='1'">1 полугодие</a></li>
-                    <li><a class="cursor" data-target="#" onClick="document.form.half.value='2'">2 полугодие</a></li>
-                </ul>
-            </div>
-            <input type="submit" value="Показать"/>
-        </form>
-        <br>
+    <div class="dropdown inline">
+        <button class="dropdown-toggle" data-toggle="dropdown">${(class)!}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <#if classes?has_content>
+                <#list classes as class>
+                    <li><a class="cursor" data-target="#"
+                           onClick="document.form.cl.value='${(class)!}'">${(class)!}</a></li>
+                </#list>
+            </#if>
+        </ul>
+    </div>
+
+    <div class="dropdown inline">
+        <button class="dropdown-toggle" data-toggle="dropdown">${(half)!} полугодие
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="cursor" data-target="#" onClick="document.form.half.value='1'">1 полугодие</a></li>
+            <li><a class="cursor" data-target="#" onClick="document.form.half.value='2'">2 полугодие</a></li>
+        </ul>
+    </div>
+    <div class="dropdown inline">
+        <button class="dropdown-toggle" data-toggle="dropdown">${(object.getObject())!}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <#if objects?has_content>
+                <#list objects as obj>
+                    <li><a class="cursor" data-target="#"
+                           onClick="document.form.objectId.value='${obj.getId()}'">${obj.getObject()}</a></li>
+                </#list>
+            </#if>
+        </ul>
+    </div>
+<#-- Форма для выбора класса-->
+    <form name="form" action="/teacher/journal/show_journal" method="get" class="inline">
+        <input type="hidden" name="cl" value="${(class)!}">
+        <input type="hidden" name="half" value="2">
+        <input type="hidden" name="objectId" value="${(object.getId())!}">
+        <input type="submit" value="Показать"/>
+    </form>
+    <br><br>
+<#--Журнал-->
     <#if table?has_content>
         <table width="500" class="table table-bordered myinput">
             <tr>
@@ -49,81 +68,39 @@
             </tr>
             <#list table as t>
                 <tr>
-                    <form action="/journal?half=${half}&object_id=${id}&student_id=${t.getStudent_id()}" method="POST">
-                        <td>${t.getStudent().getLast_name()} ${t.getStudent().getFirst_name()}</td>
-                        <#if t.getEst0()!=0>
-                            <td>${t.getEst0()}</td>
-                        <#else>
-                            <td><input type="text" name="0" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
+                <#-- Форма для выставления оценки-->
+                    <form name="add_form" action="/teacher/journal/add_estimate" method="POST">
+                        <#assign student=t.getStudentObjectTeacherByInfoId().studentsByStudentId>
+                        <td>${student.getLastName()} ${student.getFirstName()}</td>
+                    <#--Вывод всех оценок-->
+                        <#assign get=[(t.getEstimate0())!, (t.getEstimate1())!,(t.getEstimate2())!,(t.getEstimate3())!,
+                        (t.getEstimate4())!,(t.getEstimate5())!,(t.getEstimate6())!,(t.getEstimate7())!,(t.getEstimate8())!,
+                        (t.getEstimate9())!]>
+                        <#list 0..9 as i>
+                            <#if get[i]?has_content>
+                                <td>${get[i]}</td>
+                            <#else>
+                                <td><input type="text" name="${i}" oninput="validateEstimate(this)" size="1"/></td>
+                            </#if>
+                        </#list>
 
-                        <#if t.getEst1()!=0>
-                            <td>${t.getEst1()}</td>
-                        <#else>
-                            <td><input type="text" name="1" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getEst2()!=0>
-                            <td>${t.getEst2()}</td>
-                        <#else>
-                            <td><input type="text" name="2" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getEst3()!=0>
-                            <td>${t.getEst3()}</td>
-                        <#else>
-                            <td><input type="text" name="3" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getEst4()!=0>
-                            <td>${t.getEst4()}</td>
-                        <#else>
-                            <td><input type="text" name="4" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getEst5()!=0>
-                            <td>${t.getEst5()}</td>
-                        <#else>
-                            <td><input type="text" name="5" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getEst6()!=0>
-                            <td>${t.getEst6()}</td>
-                        <#else>
-                            <td><input type="text" name="6" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getEst7()!=0>
-                            <td>${t.getEst7()}</td>
-                        <#else>
-                            <td><input type="text" name="7" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getEst8()!=0>
-                            <td>${t.getEst8()}</td>
-                        <#else>
-                            <td><input type="text" name="8" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getEst9()!=0>
-                            <td>${t.getEst9()}</td>
-                        <#else>
-                            <td><input type="text" name="9" oninput="validateEstimate(this)" size="1"/></td>
-                        </#if>
-
-                        <#if t.getFinal_grade()!=0>
-                            <td>${t.getFinal_grade()}</td>
+                        <#if t.getFinalGrade()??>
+                            <td>${t.getFinalGrade()}</td>
                         <#else>
                             <td><input type="text" name="final_grade" oninput="validateEstimate(this)" size="5"/></td>
                         </#if>
-                        <td><input type="submit" value="ок"/></td>
+                        <td><input type="submit" id="addEstimate" value="ок"/></td>
+                        <input type="hidden" name="cl" value="${(class)!}">
+                        <input type="hidden" name="half" value="${(half)!}">
+                        <input type="hidden" name="studentId" value="${(student.getId())!}">
+                        <input type="hidden" name="objectId" value="${(object.getId())!}">
                     </form>
                 </tr>
             </#list>
         </table>
     <#else> <p>Выберите класс</p>
     </#if>
-    </div>
+</div>
 </#macro>
 
 <#macro right_block></#macro>

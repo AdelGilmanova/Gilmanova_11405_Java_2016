@@ -17,9 +17,9 @@ public class MyUserDetailService implements UserDetailsService {
     UsersService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UsersEntity userInfo = userService.getUser(login);
-        if (userInfo == null) throw new UsernameNotFoundException("User with name " + login + " not found");
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UsersEntity userInfo = userService.getUser(username);
+        if (userInfo == null) throw new UsernameNotFoundException("User with name " + username + " not found");
         return new MyUserDetail(userInfo);
     }
 

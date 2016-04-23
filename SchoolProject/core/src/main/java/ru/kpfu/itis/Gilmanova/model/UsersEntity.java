@@ -16,13 +16,15 @@ public class UsersEntity {
 
     public UsersEntity(String username, String hashPass, Boolean enable, String role) {
         this.username = username;
-        this.enable = enable;
-        this.role = role;
         this.hashPass = hashPass;
+        this.role = role;
+        this.enable = enable;
+    }
+
+    public UsersEntity() {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -73,16 +75,6 @@ public class UsersEntity {
     }
 
     @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (hashPass != null ? hashPass.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (enable != null ? enable.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -96,5 +88,15 @@ public class UsersEntity {
         if (enable != null ? !enable.equals(that.enable) : that.enable != null) return false;
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (hashPass != null ? hashPass.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (enable != null ? enable.hashCode() : 0);
+        return result;
     }
 }

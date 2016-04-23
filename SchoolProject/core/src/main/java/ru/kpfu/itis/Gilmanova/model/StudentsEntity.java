@@ -14,7 +14,6 @@ public class StudentsEntity {
     private String clazz;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -54,16 +53,6 @@ public class StudentsEntity {
         this.clazz = clazz;
     }
 
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (clazz != null ? clazz.hashCode() : 0);
-        return result;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,5 +66,14 @@ public class StudentsEntity {
         if (clazz != null ? !clazz.equals(that.clazz) : that.clazz != null) return false;
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (clazz != null ? clazz.hashCode() : 0);
+        return result;
     }
 }

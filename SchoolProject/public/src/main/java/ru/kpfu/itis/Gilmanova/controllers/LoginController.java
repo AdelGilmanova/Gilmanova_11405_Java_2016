@@ -14,7 +14,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String renderLoginPage(Boolean error) {
         request.setAttribute("error", error);
-        return "login";
+        return "main_page";
     }
 
 }
