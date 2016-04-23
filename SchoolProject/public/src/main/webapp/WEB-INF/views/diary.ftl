@@ -1,4 +1,5 @@
 <#-- @ftlvariable name="table" type="java.util.List<ru.kpfu.itis.Gilmanova.model.EstimationsEntity>" -->
+<#-- @ftlvariable name="student" type="ru.kpfu.itis.Gilmanova.model.StudentsEntity"-->
 <#include "templates/main_template.ftl">
 <@main_template />
 
@@ -8,7 +9,8 @@
 <div class="diary-block">
     <h3>Табель успеваемости</h3>
 
-    <p>Учащийся: ${(student)!}</p>
+    <p>Учащийся: ${(student.getLastName())!} ${(student.getFirstName())!}</p>
+    <p>Класс: ${(student.getClazz())!}</p>
 
     <form method="GET">
         <p>Период:

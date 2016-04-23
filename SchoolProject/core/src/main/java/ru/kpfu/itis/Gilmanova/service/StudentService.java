@@ -2,6 +2,7 @@ package ru.kpfu.itis.Gilmanova.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kpfu.itis.Gilmanova.model.StudentsEntity;
 import ru.kpfu.itis.Gilmanova.repository.StudentRepository;
 
 /**
@@ -12,4 +13,7 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    public StudentsEntity getStudent(Integer userId) {
+        return studentRepository.getStudent(userId);
+    }
 }

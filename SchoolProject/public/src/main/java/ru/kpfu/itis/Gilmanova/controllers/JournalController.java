@@ -36,7 +36,6 @@ public class JournalController extends BaseController {
         //TODO проверку роли, вынести в around аспект
         MyUserDetail user = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer teacherId = user.getUserEntity().getId();
-        //Integer teacherId = 1; // id препода
         List<ObjectsEntity> objects = objectsService.getObjects(teacherId);
         List<String> classes = estimationsService.getClasses(teacherId);
         model.put("half", 2);
@@ -59,7 +58,6 @@ public class JournalController extends BaseController {
         //TODO проверку роли, вынести в around аспект
         MyUserDetail user = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer teacherId = user.getUserEntity().getId();
-        //Integer teacherId = 1; // id препода
         List<ObjectsEntity> objects = objectsService.getObjects(teacherId);
         List<String> classes = estimationsService.getClasses(teacherId);
         Calendar date = new GregorianCalendar();
