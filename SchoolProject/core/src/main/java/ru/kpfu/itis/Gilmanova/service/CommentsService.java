@@ -37,4 +37,10 @@ public class CommentsService {
 
         commentsRepository.addComment(name, text, time, date);
     }
+
+
+    @Transactional
+    public void deleteComment(Integer commentId) {
+        commentsRepository.deleteComment(commentId);
+    }
 }

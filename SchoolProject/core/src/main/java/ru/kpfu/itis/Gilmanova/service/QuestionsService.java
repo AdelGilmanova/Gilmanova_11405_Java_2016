@@ -3,11 +3,13 @@ package ru.kpfu.itis.Gilmanova.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kpfu.itis.Gilmanova.model.QuestionsEntity;
 import ru.kpfu.itis.Gilmanova.repository.QuestionsRepository;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Adel on 07.04.2016.
@@ -29,5 +31,15 @@ public class QuestionsService {
         Date date = Date.valueOf(d);
 
         questionsRepository.addQuestions(theme, text, email, name, time, date);
+    }
+
+    @Transactional
+    public List<QuestionsEntity> getAllQuestions() {
+        return questionsRepository.getAllQuestions();
+    }
+
+    @Transactional
+    public void deleteQuestion(int questionId) {
+        questionsRepository.deleteQuestion(questionId);
     }
 }

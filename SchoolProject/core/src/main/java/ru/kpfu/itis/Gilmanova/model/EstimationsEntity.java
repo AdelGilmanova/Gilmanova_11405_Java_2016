@@ -3,29 +3,32 @@ package ru.kpfu.itis.Gilmanova.model;
 import javax.persistence.*;
 
 /**
- * Created by Adel on 07.04.2016.
+ * Created by Adel on 24.04.2016.
  */
 @Entity
 @Table(name = "estimations", schema = "public", catalog = "school_project")
 public class EstimationsEntity {
     private int id;
     private StudentObjectTeacherEntity studentObjectTeacherByInfoId;
-    private Integer estimate0;
-    private Integer estimate1;
-    private Integer estimate2;
-    private Integer estimate3;
-    private Integer estimate4;
-    private Integer estimate5;
-    private Integer estimate6;
-    private Integer estimate7;
-    private Integer estimate8;
-    private Integer estimate9;
+    private Integer estimate;
     private Integer semester;
     private Integer year;
     private Integer finalGrade;
 
+    public EstimationsEntity(StudentObjectTeacherEntity studentObjectTeacherByInfoId,
+                             Integer estimate, Integer semester, Integer year) {
+        this.studentObjectTeacherByInfoId = studentObjectTeacherByInfoId;
+        this.estimate = estimate;
+        this.semester = semester;
+        this.year = year;
+    }
+
+    public EstimationsEntity() {
+    }
+
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -35,103 +38,13 @@ public class EstimationsEntity {
     }
 
     @Basic
-    @Column(name = "estimate0")
-    public Integer getEstimate0() {
-        return estimate0;
+    @Column(name = "estimate")
+    public Integer getEstimate() {
+        return estimate;
     }
 
-    public void setEstimate0(Integer estimate0) {
-        this.estimate0 = estimate0;
-    }
-
-    @Basic
-    @Column(name = "estimate1")
-    public Integer getEstimate1() {
-        return estimate1;
-    }
-
-    public void setEstimate1(Integer estimate1) {
-        this.estimate1 = estimate1;
-    }
-
-    @Basic
-    @Column(name = "estimate2")
-    public Integer getEstimate2() {
-        return estimate2;
-    }
-
-    public void setEstimate2(Integer estimate2) {
-        this.estimate2 = estimate2;
-    }
-
-    @Basic
-    @Column(name = "estimate3")
-    public Integer getEstimate3() {
-        return estimate3;
-    }
-
-    public void setEstimate3(Integer estimate3) {
-        this.estimate3 = estimate3;
-    }
-
-    @Basic
-    @Column(name = "estimate4")
-    public Integer getEstimate4() {
-        return estimate4;
-    }
-
-    public void setEstimate4(Integer estimate4) {
-        this.estimate4 = estimate4;
-    }
-
-    @Basic
-    @Column(name = "estimate5")
-    public Integer getEstimate5() {
-        return estimate5;
-    }
-
-    public void setEstimate5(Integer estimate5) {
-        this.estimate5 = estimate5;
-    }
-
-    @Basic
-    @Column(name = "estimate6")
-    public Integer getEstimate6() {
-        return estimate6;
-    }
-
-    public void setEstimate6(Integer estimate6) {
-        this.estimate6 = estimate6;
-    }
-
-    @Basic
-    @Column(name = "estimate7")
-    public Integer getEstimate7() {
-        return estimate7;
-    }
-
-    public void setEstimate7(Integer estimate7) {
-        this.estimate7 = estimate7;
-    }
-
-    @Basic
-    @Column(name = "estimate8")
-    public Integer getEstimate8() {
-        return estimate8;
-    }
-
-    public void setEstimate8(Integer estimate8) {
-        this.estimate8 = estimate8;
-    }
-
-    @Basic
-    @Column(name = "estimate9")
-    public Integer getEstimate9() {
-        return estimate9;
-    }
-
-    public void setEstimate9(Integer estimate9) {
-        this.estimate9 = estimate9;
+    public void setEstimate(Integer estimate) {
+        this.estimate = estimate;
     }
 
     @Basic
@@ -172,35 +85,5 @@ public class EstimationsEntity {
 
     public void setStudentObjectTeacherByInfoId(StudentObjectTeacherEntity studentObjectTeacherByInfoId) {
         this.studentObjectTeacherByInfoId = studentObjectTeacherByInfoId;
-    }
-
-    public double avg() {
-        int sum = 0;
-        int k = 0;
-        Integer est[] = {estimate0, estimate1, estimate2, estimate3, estimate4, estimate5, estimate6,
-                estimate7, estimate8, estimate9};
-        for (int i = 0; i < 10; i++) {
-            if (est[i] != null) {
-                sum += est[i];
-                k++;
-            } else break;
-        }
-        if (k != 0) return (double) sum / k;
-        else return 0;
-    }
-
-    public String stringAvg() {
-        int sum = 0;
-        int k = 0;
-        Integer est[] = {estimate0, estimate1, estimate2, estimate3, estimate4, estimate5, estimate6,
-                estimate7, estimate8, estimate9};
-        for (int i = 0; i < 10; i++) {
-            if (est[i] != null) {
-                sum += est[i];
-                k++;
-            } else break;
-        }
-        if (k != 0) return String.format("%.1f", (double) sum / k);
-        else return "0";
     }
 }

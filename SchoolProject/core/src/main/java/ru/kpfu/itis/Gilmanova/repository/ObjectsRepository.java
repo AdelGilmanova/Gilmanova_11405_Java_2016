@@ -30,6 +30,14 @@ public class ObjectsRepository {
     }
 
     /*
+     * Возвращает список всех предеметов
+     */
+    @SuppressWarnings("unchecked")
+    public List<ObjectsEntity> getObjects() {
+        return sessionFactory.getCurrentSession().createCriteria(ObjectsEntity.class).list();
+    }
+
+    /*
      * Возвращает предмет по его id
      */
     public ObjectsEntity getObject(int objectId) {

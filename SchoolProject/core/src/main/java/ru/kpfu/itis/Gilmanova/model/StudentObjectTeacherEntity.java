@@ -14,6 +14,7 @@ public class StudentObjectTeacherEntity {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }

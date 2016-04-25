@@ -2,6 +2,7 @@ package ru.kpfu.itis.Gilmanova.repository;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.kpfu.itis.Gilmanova.model.CommentsEntity;
@@ -34,5 +35,14 @@ public class CommentsRepository {
     public void addComment(String name, String text, Time time, Date date) {
         CommentsEntity commentsEntity = new CommentsEntity(name, text, time, date);
         sessionFactory.getCurrentSession().save(commentsEntity);
+    }
+
+    /*
+     * Удаление комментария по id
+     */
+    public void deleteComment(Integer commentId) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(CommentsEntity.class);
+        CommentsEntity comment = (CommentsEntity) crit.add(Restrictions.eq("id", commentId)).uniqueResult();
+        sessionFactory.getCurrentSession().delete(comment);
     }
 }

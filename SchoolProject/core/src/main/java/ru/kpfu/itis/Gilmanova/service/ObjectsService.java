@@ -22,6 +22,11 @@ public class ObjectsService {
     }
 
     @Transactional
+    public List<ObjectsEntity> getObjects() {
+        return objectsRepository.getObjects();
+    }
+
+    @Transactional
     public ObjectsEntity getObject(int objectId) {
         return objectsRepository.getObject(objectId);
     }

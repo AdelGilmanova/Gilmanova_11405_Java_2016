@@ -33,5 +33,14 @@ public class CommentsController extends BaseController{
         return "redirect:/comments";
     }
 
+    /*
+     * Удаление комментария
+     */
+    @RequestMapping(value = "/delete_comment", method = RequestMethod.POST)
+    public String deleteComment(@RequestParam(required = false) String commentId){
+        commentsService.deleteComment(Integer.parseInt(commentId));
+        return "redirect:/comments";
+    }
+
 
 }

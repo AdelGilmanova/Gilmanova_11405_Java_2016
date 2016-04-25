@@ -82,12 +82,16 @@ public class JournalController extends BaseController {
                                 @RequestParam(required = false) String estimate,
                                 @RequestParam(required = false) String cl,
                                 ModelMap model) {
-        for (int i = 9; i >= 0; i--) {
-            if (request.getParameter(String.valueOf(i)) != null && !request.getParameter(String.valueOf(i)).equals(""))
-                estimate = request.getParameter(String.valueOf(i));
-        }
+        MyUserDetail user = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Integer teacherId = user.getUserEntity().getId();
         Calendar date = new GregorianCalendar();
-        estimationsService.addEstimate(Integer.parseInt(estimate), Integer.parseInt(studentId), Integer.parseInt(objectId), Integer.parseInt(half), date.getWeekYear());
+        String[] estimates = estimate.split(",");
+        for (String est : estimates) {
+            if (est != null && !est.isEmpty()) {
+                estimationsService.addEstimate(Integer.parseInt(est), studentId, Integer.parseInt(objectId), teacherId, Integer.parseInt(half), date.getWeekYear());
+                break;
+            }
+        }
         return showJournal(cl, half, objectId, model);
     }
 }

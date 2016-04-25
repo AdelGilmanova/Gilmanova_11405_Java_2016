@@ -159,7 +159,7 @@ a:hover {
 .journal-block {
     vertical-align: top;
     margin-left: 20px;
-    margin-bottom: 300px;
+    margin-bottom: 30px;
     width: 925px;
     padding: 20px;
     background-color: white;
@@ -169,12 +169,13 @@ a:hover {
 .diary-block {
     vertical-align: top;
     margin-left: 20px;
-    margin-bottom: 300px;
+    margin-bottom: 30px;
     width: 925px;
-    height: 800px;
+    /*height: 800px;*/
     padding: 20px;
     background-color: white;
     opacity: 0.9;
+    position: relative;
 }
 
 .myinput input {
@@ -253,4 +254,12 @@ hr {
 #hidden-block {
     display: none;
     text-align: right;
+}
+
+.a-black a{
+    color: black;
+}
+.right{
+    margin-left: 596px;
+    position: absolute;
 }

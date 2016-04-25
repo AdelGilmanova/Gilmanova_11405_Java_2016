@@ -9,8 +9,10 @@ import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.kpfu.itis.Gilmanova.model.EstimationsEntity;
+import ru.kpfu.itis.Gilmanova.model.StudentObjectTeacherEntity;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class EstimationsRepository {
     @SuppressWarnings("unchecked")
     public List<EstimationsEntity> getEstimationsForJournal(Integer teacherId, Integer objectId, String cl, Integer half, Integer year) {
         Session session = null;
-        List<EstimationsEntity> list = new ArrayList<>();
+        List<EstimationsEntity> list = new LinkedList<>();
         try {
             session = sessionFactory.openSession();
             Query query = session.createQuery("from EstimationsEntity as est where " +
@@ -76,12 +78,12 @@ public class EstimationsRepository {
         Session session = null;
         try {
             session = sessionFactory.openSession();
-            Query query = session.createQuery(" from EstimationsEntity as est where " +
-                    "est.studentObjectTeacherByInfoId.teacherObjectByTeacherObjectId.teachersByTeacherId.id=:teacherId");
+            Query query = session.createQuery(" from StudentObjectTeacherEntity as sot where " +
+                    "sot.teacherObjectByTeacherObjectId.teachersByTeacherId.id=:teacherId");
             query.setParameter("teacherId", teacherId);
-            List<EstimationsEntity> list = query.list();
-            for (EstimationsEntity element : list) {
-                String clazz = element.getStudentObjectTeacherByInfoId().getStudentsByStudentId().getClazz();
+            List<StudentObjectTeacherEntity> list = query.list();
+            for (StudentObjectTeacherEntity element : list) {
+                String clazz = element.getStudentsByStudentId().getClass_id().getClazz();
                 if (!classes.contains(clazz))
                     classes.add(clazz);
             }
@@ -98,34 +100,27 @@ public class EstimationsRepository {
     /*
      * Добавление оценки в журнал
      */
-    public void addEstimate(Integer estimate, Integer studentId, Integer objectId, Integer half, Integer year) {
-        Criteria crit = sessionFactory.getCurrentSession().createCriteria(EstimationsEntity.class);
-        crit.add(Restrictions.eq("semester", half))
-                .add(Restrictions.eq("year", year));
-        crit.createAlias("studentObjectTeacherByInfoId", "student_object_teacher");
-        crit.createAlias("student_object_teacher.studentsByStudentId", "student");
-        crit.createAlias("student_object_teacher.teacherObjectByTeacherObjectId", "teacher_object");
-        crit.createAlias("teacher_object.objectsEntity", "objects");
+    @SuppressWarnings("unchecked")
+    public void addEstimate(Integer estimate, Integer studentId, Integer objectId,
+                            Integer teacherId, Integer half, Integer year) {
+        StudentObjectTeacherEntity values = getInfo(studentId, teacherId, objectId);
+        EstimationsEntity estimationsEntity = new EstimationsEntity(values, estimate, half, year);
+        sessionFactory.getCurrentSession().save(estimationsEntity);
+
+    }
+
+    /*
+     * Возвращает сущность студент-преподаватель-предмет
+     */
+    public StudentObjectTeacherEntity getInfo(Integer studentId, Integer teacherId, Integer objectId) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(StudentObjectTeacherEntity.class);
+        crit.createAlias("studentsByStudentId", "student");
         crit.add(Restrictions.eq("student.id", studentId));
-        crit.add(Restrictions.eq("objects.id", objectId));
-        EstimationsEntity entity = (EstimationsEntity) crit.uniqueResult();
-        Integer getEstimation[] = {entity.getEstimate0(), entity.getEstimate1(), entity.getEstimate2(), entity.getEstimate3(),
-                entity.getEstimate4(), entity.getEstimate5(), entity.getEstimate6(), entity.getEstimate7(),
-                entity.getEstimate8(), entity.getEstimate9()};
-        for (int i = 0; i < 10; i++) {
-            if (getEstimation[i] == null) {
-                if (i == 0) entity.setEstimate0(estimate);
-                if (i == 1) entity.setEstimate1(estimate);
-                if (i == 2) entity.setEstimate2(estimate);
-                if (i == 3) entity.setEstimate3(estimate);
-                if (i == 4) entity.setEstimate4(estimate);
-                if (i == 5) entity.setEstimate5(estimate);
-                if (i == 6) entity.setEstimate6(estimate);
-                if (i == 7) entity.setEstimate7(estimate);
-                if (i == 8) entity.setEstimate8(estimate);
-                if (i == 9) entity.setEstimate9(estimate);
-                break;
-            }
-        }
+        crit.createAlias("teacherObjectByTeacherObjectId", "teacher_object");
+        crit.createAlias("teacher_object.teachersByTeacherId", "teacher");
+        crit.createAlias("teacher_object.objectsEntity", "object");
+        crit.add(Restrictions.eq("teacher.id", teacherId));
+        crit.add(Restrictions.eq("object.id", objectId));
+        return (StudentObjectTeacherEntity) crit.uniqueResult();
     }
 }

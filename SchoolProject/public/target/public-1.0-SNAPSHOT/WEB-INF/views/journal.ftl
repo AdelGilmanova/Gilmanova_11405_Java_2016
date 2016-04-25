@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="table" type="java.util.List<ru.kpfu.itis.Gilmanova.model.EstimationsEntity>" -->
+<#-- @ftlvariable name="table" type="java.util.Map<java.lang.String, java.util.List<Integer>>" -->
 <#-- @ftlvariable name="objects" type="java.util.List<ru.kpfu.itis.Gilmanova.model.ObjectsEntity>" -->
 <#-- @ftlvariable name="object" type="ru.kpfu.itis.Gilmanova.model.ObjectsEntity" -->
 <#-- @ftlvariable name="teacher" type="ru.kpfu.itis.Gilmanova.model.TeachersEntity"-->
@@ -62,37 +62,27 @@
         <table width="500" class="table table-bordered myinput">
             <tr>
                 <td>ФИО</td>
-                <td colspan="10" align="center">Оценки</td>
-                <td>Итоговая оценка</td>
+                <td colspan="11" align="center">Оценки</td>
                 <td></td>
             </tr>
-            <#list table as t>
+            <#list table?keys as key>
                 <tr>
                 <#-- Форма для выставления оценки-->
                     <form name="add_form" action="/teacher/journal/add_estimate" method="POST">
-                        <#assign student=t.getStudentObjectTeacherByInfoId().studentsByStudentId>
-                        <td>${student.getLastName()} ${student.getFirstName()}</td>
                     <#--Вывод всех оценок-->
-                        <#assign get=[(t.getEstimate0())!, (t.getEstimate1())!,(t.getEstimate2())!,(t.getEstimate3())!,
-                        (t.getEstimate4())!,(t.getEstimate5())!,(t.getEstimate6())!,(t.getEstimate7())!,(t.getEstimate8())!,
-                        (t.getEstimate9())!]>
-                        <#list 0..9 as i>
-                            <#if get[i]?has_content>
-                                <td>${get[i]}</td>
+                        <td>${key}</td>
+                        <#list 0..10 as i>
+                            <#if table[key][i]??>
+                                <td>${table[key][i]}</td>
                             <#else>
-                                <td><input type="text" name="${i}" oninput="validateEstimate(this)" size="1"/></td>
+                                <td><input type="text" name="estimate" oninput="validateEstimate(this)" size="1"/></td>
                             </#if>
                         </#list>
 
-                        <#if t.getFinalGrade()??>
-                            <td>${t.getFinalGrade()}</td>
-                        <#else>
-                            <td><input type="text" name="final_grade" oninput="validateEstimate(this)" size="5"/></td>
-                        </#if>
                         <td><input type="submit" id="addEstimate" value="ок"/></td>
                         <input type="hidden" name="cl" value="${(class)!}">
                         <input type="hidden" name="half" value="${(half)!}">
-                        <input type="hidden" name="studentId" value="${(student.getId())!}">
+                        <input type="hidden" name="studentId" value="${key}">
                         <input type="hidden" name="objectId" value="${(object.getId())!}">
                     </form>
                 </tr>

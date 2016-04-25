@@ -8,6 +8,8 @@
 
     <!--<import resource="spring-jdbc.xml" />-->
 
+    <import resource="spring-jpa.xml" />
+
     <import resource="spring-hibernate.xml" />
 
 </beans>

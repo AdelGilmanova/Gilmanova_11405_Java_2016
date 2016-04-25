@@ -25,8 +25,8 @@
         <spring.version>4.1.1.RELEASE</spring.version>
         <jackson.version>2.2.3</jackson.version>
         <aspectj.version>1.8.2</aspectj.version>
-        <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <spring-security.version>3.2.3.RELEASE</spring-security.version>
+        <spring.data.version>1.5.1.RELEASE</spring.data.version>
     </properties>
 
     <profiles>

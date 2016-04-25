@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import ru.kpfu.itis.Gilmanova.model.UsersEntity;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Created by Adel on 07.03.2016.
@@ -34,4 +35,13 @@ public class UsersRepository {
         return user.getId();
     }
 
+    /*
+     * Получение списка всех учащихся из таблицы Users
+     */
+    @SuppressWarnings("unchecked")
+    public List<UsersEntity> getStudents() {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(UsersEntity.class);
+        crit.add(Restrictions.eq("role", "ROLE_STUDENT"));
+        return crit.list();
+    }
 }

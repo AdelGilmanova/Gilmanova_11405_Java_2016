@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.itis.Gilmanova.model.TeachersEntity;
 import ru.kpfu.itis.Gilmanova.repository.TeacherRepository;
+import ru.kpfu.itis.Gilmanova.repository.jpa.TeacherRepositoryJPA;
+
+import java.util.List;
 
 /**
  * Created by Adel on 17.04.2016.
@@ -13,10 +16,12 @@ import ru.kpfu.itis.Gilmanova.repository.TeacherRepository;
 public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
+    @Autowired
+    private TeacherRepositoryJPA teacherRepositoryJPA;
 
     @Transactional
     public TeachersEntity getTeacher(Integer userId) {
-        return teacherRepository.getTeacher(userId);
+        return teacherRepositoryJPA.getTeacherById(userId);
     }
 
     @Transactional
@@ -24,4 +29,8 @@ public class TeacherService {
         teacherRepository.addPhoto(filePath,userId);
     }
 
+    @Transactional
+    public List<TeachersEntity> getAllTeachers() {
+        return teacherRepository.getAllTeachers();
+    }
 }

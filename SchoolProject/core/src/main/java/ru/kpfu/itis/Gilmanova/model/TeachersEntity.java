@@ -18,9 +18,11 @@ public class TeachersEntity {
     private Date birthday;
     private String photo;
     private List<TeacherObjectEntity> teacher_object;
+    private UsersEntity usersEntity;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -99,5 +101,15 @@ public class TeachersEntity {
 
     public void setTeacher_object(List<TeacherObjectEntity> teacher_object) {
         this.teacher_object = teacher_object;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    public UsersEntity getUsersEntity() {
+        return usersEntity;
+    }
+
+    public void setUsersEntity(UsersEntity usersEntity) {
+        this.usersEntity = usersEntity;
     }
 }

@@ -19,6 +19,7 @@ public class MainController extends BaseController {
             String role = ((MyUserDetail) user).getUserEntity().getRole();
             if (role.equals("ROLE_TEACHER")) return "redirect:/teacher";
             if (role.equals("ROLE_STUDENT")) return "redirect:/student/diary";
+            if (role.equals("ROLE_ADMIN")) return "redirect:/admin";
         }
         return "main_page";
     }

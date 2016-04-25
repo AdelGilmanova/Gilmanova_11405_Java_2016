@@ -1,4 +1,5 @@
 <#-- @ftlvariable name="comments" type="java.util.List<ru.kpfu.itis.Gilmanova.model.CommentsEntity>" -->
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"]>
 <#include "templates/main_template.ftl">
 <@main_template scripts=["comments.js"]/>
 
@@ -6,22 +7,41 @@
 
 <div class="comment-block">
     <h2 align="center">Отзывы</h2>
+
+    <@sec.authorize ifNotGranted="ROLE_ADMIN">
     <p id="write_comment">Оставить отзыв</p>
+    </@sec.authorize>
 
     <dev id="hidden-block">
-    <form method="POST">
-        <p>Ваше имя: <input required type="text" name="name"/></p>
-        <p><textarea required name='text' oninput="validateLength(this)" rows='2' cols='76'></textarea></p>
-        <p><input type="submit" value="Отправить"/></p>
-    </form>
+        <form method="POST">
+            <p>Ваше имя: <input required type="text" name="name"/></p>
+            <p><textarea required name='text' oninput="validateLength(this)" rows='2' cols='76'></textarea></p>
+            <p><input type="submit" value="Отправить"/></p>
+        </form>
     </dev>
 
     <#if comments?has_content>
         <#list comments as comment>
-            <li>${comment}</li>
+
+            <@sec.authorize ifAnyGranted="ROLE_ADMIN">
+                <div class="delete-block">
+                    <form action="/comments/delete_comment" method="post">
+                        <input type="hidden" name="commentId" value="${comment.getId()}">
+                        <input type="submit" value="Удалить">
+                    </form>
+                </div>
+            </@sec.authorize>
+
+            <li>${comment.getUserName()}
+                <br>
+            ${comment.getContent()}
+                <br>
+            ${comment.getDate()}
+            </li>
             <hr>
+
         </#list>
-    <#else> Комметариев пока нет.
+    <#else> <p align="center">Комметариев пока нет.</p>
     </#if>
 </div>
 
