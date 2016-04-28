@@ -20,7 +20,7 @@
 <body>
 
 <div class="content">
-    <#include "menu_and_logo.ftl">
+    <#include "header.ftl">
     <@left_block/>
     <@center_block/>
     <@right_block/>

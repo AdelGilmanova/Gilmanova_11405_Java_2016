@@ -1,6 +1,7 @@
 package ru.kpfu.itis.Gilmanova.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Adel on 07.04.2016.
@@ -11,6 +12,7 @@ public class TeacherObjectEntity {
     private int id;
     private TeachersEntity teachersByTeacherId;
     private ObjectsEntity objectsEntity;
+    private List<ClassTeacherObjectEntity> class_teacher_object_id;
 
     @Id
     @Column(name = "id")
@@ -43,4 +45,15 @@ public class TeacherObjectEntity {
         this.teachersByTeacherId = teachersByTeacherId;
     }
 
+    @OneToMany(cascade = CascadeType.REFRESH,
+            fetch = FetchType.LAZY,
+            mappedBy = "teacher_object_id",
+            targetEntity = ClassTeacherObjectEntity.class)
+    public List<ClassTeacherObjectEntity> getClass_teacher_object_id() {
+        return class_teacher_object_id;
+    }
+
+    public void setClass_teacher_object_id(List<ClassTeacherObjectEntity> class_teacher_object_id) {
+        this.class_teacher_object_id = class_teacher_object_id;
+    }
 }

@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface ClassesRepositoryJPA extends JpaRepository<ClassesEntity, Long> {
     List<ClassesEntity> findAll();
+    ClassesEntity getClassById(Integer classId);
 }

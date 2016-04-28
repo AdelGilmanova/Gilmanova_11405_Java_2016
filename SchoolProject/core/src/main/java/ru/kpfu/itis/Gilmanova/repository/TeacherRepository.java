@@ -43,4 +43,49 @@ public class TeacherRepository {
         crit.addOrder(org.hibernate.criterion.Order.asc("id"));
         return crit.list();
     }
+
+    /*
+     * Возвращает отфильтрованных по имени преподов по запросу админа
+     */
+    @SuppressWarnings("unchecked")
+    public List<TeachersEntity> getTeacherByName(String name) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(TeachersEntity.class);
+        crit.add(Restrictions.or(
+                Restrictions.like("firstName", "%" + name + "%"),
+                Restrictions.like("lastName", "%" + name + "%")));
+        //crit.addOrder(org.hibernate.criterion.Order.asc("id"));
+        return crit.list();
+    }
+
+    /*
+     * Блокировка препода
+     */
+    public void blockTeacher(Integer teacherId) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(TeachersEntity.class);
+        TeachersEntity teacher = (TeachersEntity) crit.add(Restrictions.eq("id", teacherId)).uniqueResult();
+        teacher.getUsersEntity().setEnable(false);
+        sessionFactory.getCurrentSession().update(teacher);
+    }
+
+    /*
+     * Блокировка препода
+     */
+    public void unblockTeacher(Integer teacherId) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(TeachersEntity.class);
+        TeachersEntity teacher = (TeachersEntity) crit.add(Restrictions.eq("id", teacherId)).uniqueResult();
+        teacher.getUsersEntity().setEnable(true);
+        sessionFactory.getCurrentSession().update(teacher);
+    }
+
+    /*
+     *  Редактирование информации о преподе
+     */
+    public void changeTeacherInfo(Integer teacherId, String lastName, String firstName, String secondName) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(TeachersEntity.class);
+        TeachersEntity teacher = (TeachersEntity) crit.add(Restrictions.eq("id", teacherId)).uniqueResult();
+        teacher.setLastName(lastName);
+        teacher.setFirstName(firstName);
+        teacher.setSecondName(secondName);
+        sessionFactory.getCurrentSession().update(teacher);
+    }
 }

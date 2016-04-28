@@ -59,6 +59,7 @@
                 <value>ru.kpfu.itis.Gilmanova.model.StudentObjectTeacherEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.TeacherObjectEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.ClassesEntity</value>
+                <value>ru.kpfu.itis.Gilmanova.model.ClassTeacherObjectEntity</value>
             </list>
         </property>
     </bean>

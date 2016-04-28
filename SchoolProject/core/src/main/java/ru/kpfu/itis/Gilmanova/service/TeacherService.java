@@ -33,4 +33,24 @@ public class TeacherService {
     public List<TeachersEntity> getAllTeachers() {
         return teacherRepository.getAllTeachers();
     }
+
+    @Transactional
+    public List<TeachersEntity> getTeacherByName(String name) {
+        return teacherRepository.getTeacherByName(name);
+    }
+
+    @Transactional
+    public void blockTeacher(Integer teacherId) {
+        teacherRepository.blockTeacher(teacherId);
+    }
+
+    @Transactional
+    public void unblockTeacher(Integer teacherId) {
+        teacherRepository.unblockTeacher(teacherId);
+    }
+
+    @Transactional
+    public void changeTeacherInfo(Integer teacherId, String lastName, String firstName, String secondName) {
+        teacherRepository.changeTeacherInfo(teacherId, lastName, firstName,secondName);
+    }
 }

@@ -21,11 +21,10 @@
 
         <li>Зарегестрировать
             <ul>
-                <li><a href="">нового учащегося</a></li>
-                <li><a href="">нового преподавателя</a></li>
+                <li><a href="/admin/add_student">нового учащегося</a></li>
+                <li><a href="/admin/add_teacher">нового преподавателя</a></li>
             </ul>
         </li>
-
     </ul>
 </div>
 

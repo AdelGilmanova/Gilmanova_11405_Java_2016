@@ -44,4 +44,19 @@ public class StudentService {
     public List<StudentsEntity> getStudentByName(String name) {
         return studentRepository.getStudentByName(name);
     }
+
+    @Transactional
+    public void blockStudent(Integer studentId) {
+        studentRepository.blockStudent(studentId);
+    }
+
+    @Transactional
+    public void unblockStudent(int studentId) {
+        studentRepository.unblockStudent(studentId);
+    }
+
+    @Transactional
+    public void changedStudentInfo(Integer studentId, String lastName, String firstName, Integer classTd) {
+        studentRepository.changedStudentInfo(studentId, lastName, firstName, classTd);
+    }
 }

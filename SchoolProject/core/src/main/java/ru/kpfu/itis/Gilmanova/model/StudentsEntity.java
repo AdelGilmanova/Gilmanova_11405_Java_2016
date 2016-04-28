@@ -16,6 +16,16 @@ public class StudentsEntity {
     private List<StudentObjectTeacherEntity> student_object_teacher;
     private UsersEntity usersEntity;
 
+    public StudentsEntity() {
+    }
+
+    public StudentsEntity(String lastName, String firstName, ClassesEntity class_id, UsersEntity usersEntity) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.class_id = class_id;
+        this.usersEntity = usersEntity;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -70,7 +80,7 @@ public class StudentsEntity {
     }
 
     @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     public UsersEntity getUsersEntity() {
         return usersEntity;
     }
