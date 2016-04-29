@@ -17,18 +17,13 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     @Transactional
-    public StudentsEntity getStudent(Integer userId) {
-        return studentRepository.getStudent(userId);
+    public StudentsEntity getStudentByUserId(Integer userId) {
+        return studentRepository.getStudentByUserId(userId);
     }
 
     @Transactional
-    public List<StudentsEntity> getStudents(Integer teacherId, Integer objectId, String cl) {
-        return studentRepository.getStudents(teacherId, objectId, cl);
-    }
-
-    @Transactional
-    public Integer getStudentId(String lastName, String firstName) {
-        return studentRepository.getStudentId(lastName, firstName);
+    public StudentsEntity getStudent(Integer studentId) {
+        return studentRepository.getStudent(studentId);
     }
 
     @Transactional
@@ -59,4 +54,5 @@ public class StudentService {
     public void changedStudentInfo(Integer studentId, String lastName, String firstName, Integer classTd) {
         studentRepository.changedStudentInfo(studentId, lastName, firstName, classTd);
     }
+
 }

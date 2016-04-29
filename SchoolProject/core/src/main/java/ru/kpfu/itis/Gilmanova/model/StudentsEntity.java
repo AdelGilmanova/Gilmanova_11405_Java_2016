@@ -13,7 +13,6 @@ public class StudentsEntity {
     private String lastName;
     private String firstName;
     private ClassesEntity class_id;
-    private List<StudentObjectTeacherEntity> student_object_teacher;
     private UsersEntity usersEntity;
 
     public StudentsEntity() {
@@ -65,18 +64,6 @@ public class StudentsEntity {
 
     public void setClass_id(ClassesEntity class_id) {
         this.class_id = class_id;
-    }
-
-    @OneToMany(cascade = CascadeType.REFRESH,
-            fetch = FetchType.LAZY,
-            mappedBy = "studentsByStudentId",
-            targetEntity = StudentObjectTeacherEntity.class)
-    public List<StudentObjectTeacherEntity> getStudent_object_teacher() {
-        return student_object_teacher;
-    }
-
-    public void setStudent_object_teacher(List<StudentObjectTeacherEntity> student_object_teacher) {
-        this.student_object_teacher = student_object_teacher;
     }
 
     @OneToOne

@@ -6,6 +6,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Admin;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Logger;
 import ru.kpfu.itis.Gilmanova.controllers.BaseController;
 import ru.kpfu.itis.Gilmanova.service.ClassesService;
 import ru.kpfu.itis.Gilmanova.service.StudentService;
@@ -27,6 +29,8 @@ public class UsersController extends BaseController {
     /*
      * Таблица с учащимися
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/students_list", method = RequestMethod.GET)
     public String renderStudentsTable(ModelMap model) {
         model.put("students", studentService.getAllStudents());
@@ -37,6 +41,8 @@ public class UsersController extends BaseController {
     /*
      * Таблица с преподавателями
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/teacher_list", method = RequestMethod.GET)
     public String renderTeachersList(ModelMap model) {
         model.put("teachers", teacherService.getAllTeachers());
@@ -46,6 +52,8 @@ public class UsersController extends BaseController {
     /*
      * Возвращает учащихся с нужного класса AJAX
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/searchClass", method = RequestMethod.GET)
     public String searchClass(@RequestParam(required = false) String classId,
                               ModelMap model) {
@@ -56,6 +64,8 @@ public class UsersController extends BaseController {
     /*
      * Возвращает учащихся с нужным именем AJAX
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/searchByName", method = RequestMethod.GET)
     public String searchByName(@RequestParam(required = false) String name,
                                ModelMap model) {
@@ -66,6 +76,8 @@ public class UsersController extends BaseController {
     /*
      * Возвращает преподов с нужным именем AJAX
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/searchTeacherByName", method = RequestMethod.GET)
     public String searchTeacherByName(@RequestParam(required = false) String name,
                                       ModelMap model) {

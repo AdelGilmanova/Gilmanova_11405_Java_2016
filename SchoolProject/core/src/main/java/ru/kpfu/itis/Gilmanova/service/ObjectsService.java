@@ -17,17 +17,17 @@ public class ObjectsService {
     private ObjectsRepository objectsRepository;
 
     @Transactional
+    public ObjectsEntity getObject(int objectId) {
+        return objectsRepository.getObject(objectId);
+    }
+
+    @Transactional
     public List<ObjectsEntity> getObjects(Integer teacherId) {
         return objectsRepository.getObjects(teacherId);
     }
 
     @Transactional
-    public List<ObjectsEntity> getObjects() {
-        return objectsRepository.getObjects();
-    }
-
-    @Transactional
-    public ObjectsEntity getObject(int objectId) {
-        return objectsRepository.getObject(objectId);
+    public List<ObjectsEntity> getAllObjects() {
+        return objectsRepository.getAllObjects();
     }
 }

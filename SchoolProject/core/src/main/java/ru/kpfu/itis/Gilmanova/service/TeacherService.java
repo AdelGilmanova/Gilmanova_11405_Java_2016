@@ -20,13 +20,13 @@ public class TeacherService {
     private TeacherRepositoryJPA teacherRepositoryJPA;
 
     @Transactional
-    public TeachersEntity getTeacher(Integer userId) {
-        return teacherRepositoryJPA.getTeacherById(userId);
+    public TeachersEntity getTeacher(Integer teacherId) {
+        return teacherRepositoryJPA.getTeacherById(teacherId);
     }
 
     @Transactional
-    public void addPhoto(String filePath, Integer userId) {
-        teacherRepository.addPhoto(filePath,userId);
+    public TeachersEntity getTeacherByUserId(Integer userId) {
+        return teacherRepository.getTeacherByUserId(userId);
     }
 
     @Transactional
@@ -51,6 +51,25 @@ public class TeacherService {
 
     @Transactional
     public void changeTeacherInfo(Integer teacherId, String lastName, String firstName, String secondName) {
-        teacherRepository.changeTeacherInfo(teacherId, lastName, firstName,secondName);
+        teacherRepository.changeTeacherInfo(teacherId, lastName, firstName, secondName);
     }
+
+    @Transactional
+    public boolean addObject(Integer teacherId, Integer objectId) {
+        if (teacherRepository.checkTeacher_Object(teacherId, objectId)) {//если не существует такого отношения
+            teacherRepository.addObject(teacherId, objectId);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean addClass(Integer classId, Integer teacherId, Integer objectId) {
+        if (teacherRepository.checkClass_Teacher(classId, teacherId, objectId)) {//если не существует такого отношения
+            teacherRepository.addClass(classId, teacherId, objectId);
+            return true;
+        }
+        return false;
+    }
+
 }

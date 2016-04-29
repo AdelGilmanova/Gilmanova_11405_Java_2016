@@ -5,7 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.kpfu.itis.Gilmanova.model.TeachersEntity;
+import ru.kpfu.itis.Gilmanova.model.*;
+import ru.kpfu.itis.Gilmanova.service.ClassesService;
+import ru.kpfu.itis.Gilmanova.service.ObjectsService;
 
 import java.util.List;
 
@@ -16,22 +18,17 @@ import java.util.List;
 public class TeacherRepository {
     @Autowired
     private SessionFactory sessionFactory;
+    @Autowired
+    private ObjectsService objectsService;
+    @Autowired
+    private ClassesService classesService;
 
     /*
-     * Возвращает учителя по его id
+     * Возвращает учителя по userId
      */
-    public TeachersEntity getTeacher(Integer userId) {
+    public TeachersEntity getTeacherByUserId(Integer userId) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(TeachersEntity.class);
-        return (TeachersEntity) crit.add(Restrictions.eq("id", userId)).uniqueResult();
-    }
-
-    /*
-     * Добавление фото (не работает)
-     */
-    public void addPhoto(String filePath, Integer userId) {
-        TeachersEntity teachersEntity = getTeacher(userId);
-        teachersEntity.setPhoto(filePath);
-        sessionFactory.getCurrentSession().update(teachersEntity);
+        return (TeachersEntity) crit.add(Restrictions.eq("usersEntity.id", userId)).uniqueResult();
     }
 
     /*
@@ -87,5 +84,59 @@ public class TeacherRepository {
         teacher.setFirstName(firstName);
         teacher.setSecondName(secondName);
         sessionFactory.getCurrentSession().update(teacher);
+    }
+
+    /*
+     * Проверка на существование связи препод-предмет, если не сущ-ет возврвщает true
+     */
+    public boolean checkTeacher_Object(Integer teacherId, Integer objectId) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(TeacherObjectEntity.class);
+        crit.add(Restrictions.eq("teachersByTeacherId.id", teacherId));
+        crit.add(Restrictions.eq("objectsEntity.id", objectId));
+        TeacherObjectEntity entity = (TeacherObjectEntity) crit.uniqueResult();
+        return entity == null;
+    }
+
+    /*
+     * Добавление новой связи препод-предмет
+     */
+    public void addObject(Integer teacherId, Integer objectId) {
+        TeachersEntity teachersEntity = getTeacherByUserId(teacherId);
+        ObjectsEntity objectsEntity = objectsService.getObject(objectId);
+        TeacherObjectEntity entity = new TeacherObjectEntity(teachersEntity, objectsEntity);
+        sessionFactory.getCurrentSession().save(entity);
+    }
+
+    /*
+     * Проверка на существование связи класс-препод, если не сущ-ет возврвщает true
+     */
+    public boolean checkClass_Teacher(Integer classId, Integer teacherId, Integer objectId) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(ClassTeacherObjectEntity.class);
+        crit.add(Restrictions.eq("class_id.id", classId));
+        crit.createAlias("teacher_object_id", "teacher_object");
+        crit.add(Restrictions.eq("teacher_object.teachersByTeacherId.id", teacherId));
+        crit.add(Restrictions.eq("teacher_object.objectsEntity.id", objectId));
+        TeacherObjectEntity entity = (TeacherObjectEntity) crit.uniqueResult();
+        return entity == null;
+    }
+
+    /*
+     * Возврящает связь препод-предмет
+     */
+    public TeacherObjectEntity getTeacher_Object(Integer teacherId, Integer objectId) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(TeacherObjectEntity.class);
+        crit.add(Restrictions.eq("teachersByTeacherId.id", teacherId));
+        crit.add(Restrictions.eq("objectsEntity.id", objectId));
+        return (TeacherObjectEntity) crit.uniqueResult();
+    }
+
+    /*
+     * Добавление новую связи класс-препод-предмет
+     */
+    public void addClass(Integer classId, Integer teacherId, Integer objectId) {
+        ClassesEntity classesEntity = classesService.getClazz(classId);
+        TeacherObjectEntity teacherObjectEntity = getTeacher_Object(teacherId, objectId);
+        ClassTeacherObjectEntity classTeacherObjectEntity = new ClassTeacherObjectEntity(classesEntity, teacherObjectEntity);
+        sessionFactory.getCurrentSession().save(classTeacherObjectEntity);
     }
 }

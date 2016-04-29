@@ -19,7 +19,7 @@
         <@form.errors path="secondName" cssStyle="color: red; font-size: 10px" /></p>
 
         <@form.radiobutton path="gender" value="мужской" label="M"/>
-        <@form.radiobutton path="gender" value="женский" label="Ж"/>
+        <@form.radiobutton path="gender" value="woman" label="Ж"/>
 
         <p>Дата рождения
         <@form.select path="day">

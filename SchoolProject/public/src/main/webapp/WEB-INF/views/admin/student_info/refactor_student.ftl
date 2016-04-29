@@ -7,8 +7,8 @@
 
 <#macro center_block>
 <div class="diary-block">
-    <h3 align="center">Редактирование данных учащегося</h3>
-
+    <h3><a href="/admin/students_list" class="cabinet-link">Списки учащихся</a> - Редактирование данных учащегося</h3>
+    <br>
     <form method="post">
         <p><input type="text" name="lastName" value="${student.getLastName()}" required></p>
 

@@ -5,7 +5,7 @@
 <#macro left_block>
 <div class="cabinet-navigation opacity">
     <#--<p><a class="cursor cabinet-link" data-toggle="modal" data-target="#photo">Поменять фотографию профиля</a></p>-->
-    <p><a href="/teacher/journal" class="cabinet-link">Журнал</a></p>
+    <p><a href="/teacher/add_home_work" class="cabinet-link">Задать домашнее задание</a></p>
 </div>
 </#macro>
 

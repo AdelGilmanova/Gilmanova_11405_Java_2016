@@ -17,12 +17,12 @@
         <@form.errors path="firstName" cssStyle="color: red; font-size: 10px" /></p>
 
         Класс: <@form.select path="clazz">
-            <#if classes?has_content>
-                <#list classes as class>
-                    <@form.option value="${class.getId()}">${class.getClazz()}</@form.option>
-                </#list>
-            </#if>
-        </@form.select><br><br>
+        <#if classes?has_content>
+            <#list classes as class>
+                <@form.option value="${class.getId()}">${class.getClazz()}</@form.option>
+            </#list>
+        </#if>
+    </@form.select><br><br>
 
         <p><@form.input path="login" id="login" placeholder="Логин"/>
         <@form.errors path="login" cssStyle="color: red; font-size: 10px" /></p>

@@ -54,3 +54,45 @@ teacherFunc = function (request, response) {
             }
         })
 };
+
+function addObject() {
+    var msg = $('#addObjectForm').serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/admin/add_object',
+        data: msg,
+        success: function (data) {
+            if (data == 'ok') {
+                alert("Предмет добавлен.");
+            }
+            if(data == 'no'){
+                alert("Этот предмет уже преподается данным преподавателем.");
+            }
+            location.reload();
+        },
+        error: function () {
+            alert('Приносим извинения. На сервере произошла ошибка');
+        }
+    });
+}
+
+function addClass() {
+    var msg = $('#addClassForm').serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/admin/add_class',
+        data: msg,
+        success: function (data) {
+            if (data == 'ok') {
+                alert("Класс добавлен.");
+            }else{
+                alert("Данный преподаватель уже преподает в этом классе.");
+            }
+            location.reload();
+        },
+        error: function () {
+            alert('Приносим извинения. На сервере произошла ошибка');
+        }
+    });
+}
+

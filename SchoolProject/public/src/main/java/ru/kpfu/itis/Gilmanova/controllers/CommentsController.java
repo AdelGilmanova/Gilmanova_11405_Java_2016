@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Logger;
 import ru.kpfu.itis.Gilmanova.service.CommentsService;
 
 /**
@@ -18,6 +19,7 @@ public class CommentsController extends BaseController{
     @Autowired
     private CommentsService commentsService;
 
+    @Logger
     @RequestMapping(method = RequestMethod.GET)
     public String renderComments(ModelMap model){
         model.put("comments", commentsService.getComments());
@@ -27,6 +29,7 @@ public class CommentsController extends BaseController{
     /*
      * Добавление нового комментария в бд
      */
+    @Logger
     @RequestMapping(method = RequestMethod.POST)
     public String addComments(@RequestParam String name, @RequestParam String text){
         commentsService.addComment(name, text);
@@ -36,6 +39,7 @@ public class CommentsController extends BaseController{
     /*
      * Удаление комментария
      */
+    @Logger
     @RequestMapping(value = "/delete_comment", method = RequestMethod.POST)
     public String deleteComment(@RequestParam(required = false) String commentId){
         commentsService.deleteComment(Integer.parseInt(commentId));

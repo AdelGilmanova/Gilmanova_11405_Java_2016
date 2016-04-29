@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Admin;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Logger;
 import ru.kpfu.itis.Gilmanova.controllers.BaseController;
 import ru.kpfu.itis.Gilmanova.service.StudentService;
 import ru.kpfu.itis.Gilmanova.service.TeacherService;
@@ -24,6 +26,8 @@ public class BlockingController extends BaseController {
     /*
      * Блокировка студента
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/blockStudent", method = RequestMethod.GET)
     public String blockStudent(@RequestParam(required = false) String studentId) {
         studentService.blockStudent(Integer.parseInt(studentId));
@@ -33,6 +37,8 @@ public class BlockingController extends BaseController {
     /*
      * Снятие блокировка студента
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/unblockStudent", method = RequestMethod.GET)
     public String unblockStudent(@RequestParam(required = false) String studentId) {
         studentService.unblockStudent(Integer.parseInt(studentId));
@@ -42,6 +48,8 @@ public class BlockingController extends BaseController {
     /*
      * Блокировка препода
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/blockTeacher", method = RequestMethod.GET)
     public String blockTeacher(@RequestParam(required = false) String teacherId) {
         teacherService.blockTeacher(Integer.parseInt(teacherId));
@@ -51,6 +59,8 @@ public class BlockingController extends BaseController {
     /*
      * Снятие блокировка препода
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/unblockTeacher", method = RequestMethod.GET)
     public String unblockTeacher(@RequestParam(required = false) String teacherId) {
         teacherService.unblockTeacher(Integer.parseInt(teacherId));

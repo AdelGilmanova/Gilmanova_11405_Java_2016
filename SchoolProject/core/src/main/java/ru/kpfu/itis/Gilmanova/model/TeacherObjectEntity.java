@@ -14,6 +14,14 @@ public class TeacherObjectEntity {
     private ObjectsEntity objectsEntity;
     private List<ClassTeacherObjectEntity> class_teacher_object_id;
 
+    public TeacherObjectEntity() {
+    }
+
+    public TeacherObjectEntity(TeachersEntity teachersByTeacherId, ObjectsEntity objectsEntity) {
+        this.teachersByTeacherId = teachersByTeacherId;
+        this.objectsEntity = objectsEntity;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,4 +64,5 @@ public class TeacherObjectEntity {
     public void setClass_teacher_object_id(List<ClassTeacherObjectEntity> class_teacher_object_id) {
         this.class_teacher_object_id = class_teacher_object_id;
     }
+
 }

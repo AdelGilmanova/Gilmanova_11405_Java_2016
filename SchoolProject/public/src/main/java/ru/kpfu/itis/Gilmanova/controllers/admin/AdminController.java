@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Admin;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Logger;
 import ru.kpfu.itis.Gilmanova.controllers.BaseController;
 import ru.kpfu.itis.Gilmanova.service.ClassesService;
 import ru.kpfu.itis.Gilmanova.service.QuestionsService;
@@ -30,6 +32,8 @@ public class AdminController extends BaseController {
     /*
      * Страница админа
      */
+    @Logger
+    @Admin
     @RequestMapping(method = RequestMethod.GET)
     public String renderAdmin() {
         return "admin/admin_cabinet";
@@ -38,6 +42,8 @@ public class AdminController extends BaseController {
     /*
      * Список вопросов пользователей
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/show_questions", method = RequestMethod.GET)
     public String renderQuestions(ModelMap model) {
         model.put("questions", questionsService.getAllQuestions());

@@ -12,6 +12,14 @@ public class ClassTeacherObjectEntity {
     private ClassesEntity class_id;
     private TeacherObjectEntity teacher_object_id;
 
+    public ClassTeacherObjectEntity() {
+    }
+
+    public ClassTeacherObjectEntity(ClassesEntity class_id, TeacherObjectEntity teacher_object_id) {
+        this.class_id = class_id;
+        this.teacher_object_id = teacher_object_id;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)

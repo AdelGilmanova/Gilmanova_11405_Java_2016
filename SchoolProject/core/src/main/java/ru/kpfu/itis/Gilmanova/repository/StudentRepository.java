@@ -19,38 +19,19 @@ public class StudentRepository {
     private SessionFactory sessionFactory;
 
     /*
+     * Возвращает студента по userId
+     */
+    public StudentsEntity getStudentByUserId(Integer userId) {
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(StudentsEntity.class);
+        return (StudentsEntity) crit.add(Restrictions.eq("usersEntity.id", userId)).uniqueResult();
+    }
+
+    /*
      * Возвращает студента по его id
      */
-    public StudentsEntity getStudent(Integer userId) {
+    public StudentsEntity getStudent(Integer studentId) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(StudentsEntity.class);
-        return (StudentsEntity) crit.add(Restrictions.eq("id", userId)).uniqueResult();
-    }
-
-    /*
-     * Возвращает список учеников в журнал
-     */
-    @SuppressWarnings("unchecked")
-    public List<StudentsEntity> getStudents(Integer teacherId, Integer objectId, String cl) {
-        Criteria crit = sessionFactory.getCurrentSession().createCriteria(StudentsEntity.class);
-        crit.createAlias("student_object_teacher", "student_object_teacher");
-        crit.createAlias("student_object_teacher.teacherObjectByTeacherObjectId", "teacher_object");
-        crit.createAlias("teacher_object.objectsEntity", "objects");
-        crit.add(Restrictions.eq("objects.id", objectId));
-        crit.createAlias("teacher_object.teachersByTeacherId", "teachers");
-        crit.add(Restrictions.eq("teachers.id", teacherId));
-        crit.createAlias("student_object_teacher.studentsByStudentId", "student");
-        crit.add(Restrictions.eq("student.classid", cl));
-        return crit.list();
-    }
-
-    /*
-     * Возвращает id ученика по его имени
-     */
-    public Integer getStudentId(String lastName, String firstName) {
-        Criteria crit = sessionFactory.getCurrentSession().createCriteria(StudentsEntity.class);
-        crit.add(Restrictions.eq("lastName", lastName))
-                .add(Restrictions.eq("firstName", firstName));
-        return ((StudentsEntity) crit.uniqueResult()).getId();
+        return (StudentsEntity) crit.add(Restrictions.eq("id", studentId)).uniqueResult();
     }
 
     /*
@@ -118,4 +99,5 @@ public class StudentRepository {
         student.setClass_id(classesEntity);
         sessionFactory.getCurrentSession().update(student);
     }
+
 }

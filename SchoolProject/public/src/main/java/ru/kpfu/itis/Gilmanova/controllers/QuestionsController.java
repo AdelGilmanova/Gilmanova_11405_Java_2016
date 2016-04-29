@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Logger;
 import ru.kpfu.itis.Gilmanova.service.QuestionsService;
 
 /**
@@ -17,6 +18,7 @@ public class QuestionsController extends BaseController {
     @Autowired
     private QuestionsService questionsService;
 
+    @Logger
     @RequestMapping(value = "/ask", method = RequestMethod.GET)
     public String renderAsking() {
         return "ask_question";
@@ -25,6 +27,7 @@ public class QuestionsController extends BaseController {
     /*
      * Добавление вопроса в бд
      */
+    @Logger
     @ResponseBody
     @RequestMapping(value = "/ask", method = RequestMethod.POST)
     public String addQuestion(@RequestParam String theme, @RequestParam String text,
@@ -36,6 +39,7 @@ public class QuestionsController extends BaseController {
     /*
      * Удаление вопроса
      */
+    @Logger
     @RequestMapping(value = "/delete_question", method = RequestMethod.POST)
     public String deleteQuestion(@RequestParam(required = false) String questionId) {
         questionsService.deleteQuestion(Integer.parseInt(questionId));

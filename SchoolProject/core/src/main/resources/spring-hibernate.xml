@@ -55,11 +55,10 @@
                 <value>ru.kpfu.itis.Gilmanova.model.StudentsEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.TeachersEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.UsersEntity</value>
-                <value>ru.kpfu.itis.Gilmanova.model.EstimationsEntity</value>
-                <value>ru.kpfu.itis.Gilmanova.model.StudentObjectTeacherEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.TeacherObjectEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.ClassesEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.ClassTeacherObjectEntity</value>
+                <value>ru.kpfu.itis.Gilmanova.model.HomeWorkEntity</value>
             </list>
         </property>
     </bean>

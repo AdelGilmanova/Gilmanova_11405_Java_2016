@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Admin;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Logger;
 import ru.kpfu.itis.Gilmanova.controllers.BaseController;
 import ru.kpfu.itis.Gilmanova.form.StudentRegistrationFormBean;
 import ru.kpfu.itis.Gilmanova.form.TeacherRegistrationFormBean;
@@ -39,6 +41,8 @@ public class RegistrationController extends BaseController {
     /*
      * Отображение формы по добавлению нового учащегося
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/add_student", method = RequestMethod.GET)
     public String addStudentGET(ModelMap model) {
         request.setAttribute(STUDENT_FORM, new StudentRegistrationFormBean());
@@ -49,6 +53,7 @@ public class RegistrationController extends BaseController {
     /*
      * Добавление нового учащегося
      */
+    @Logger
     @RequestMapping(value = "/add_student", method = RequestMethod.POST)
     public String addStudentPOST(@Valid @ModelAttribute(STUDENT_FORM) StudentRegistrationFormBean regFormBean,
                                  BindingResult bindingResult)
@@ -66,6 +71,8 @@ public class RegistrationController extends BaseController {
     /*
      * Отображение формы по добавлению нового преподавателя
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/add_teacher", method = RequestMethod.GET)
     public String addTeacherGET() {
         request.setAttribute(TEACHER_FORM, new TeacherRegistrationFormBean());
@@ -75,6 +82,7 @@ public class RegistrationController extends BaseController {
     /*
      * Добавление нового препода
      */
+    @Logger
     @RequestMapping(value = "/add_teacher", method = RequestMethod.POST)
     public String addTeacherPOST(@Valid @ModelAttribute(TEACHER_FORM) TeacherRegistrationFormBean regFormBean,
                                  BindingResult bindingResult)

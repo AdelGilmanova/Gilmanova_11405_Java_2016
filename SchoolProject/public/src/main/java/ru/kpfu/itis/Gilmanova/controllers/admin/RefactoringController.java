@@ -6,7 +6,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Admin;
+import ru.kpfu.itis.Gilmanova.aspects.annotations.Logger;
 import ru.kpfu.itis.Gilmanova.service.ClassesService;
+import ru.kpfu.itis.Gilmanova.service.ObjectsService;
 import ru.kpfu.itis.Gilmanova.service.StudentService;
 import ru.kpfu.itis.Gilmanova.service.TeacherService;
 
@@ -23,10 +27,14 @@ public class RefactoringController {
     private TeacherService teacherService;
     @Autowired
     private ClassesService classesService;
+    @Autowired
+    private ObjectsService objectsService;
 
     /*
      * Отображение страницы для редактирования информации об учащемся
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/refactor_student", method = RequestMethod.GET)
     public String refactorStudentGET(@RequestParam(required = false) String studentId,
                                      ModelMap model) {
@@ -38,6 +46,7 @@ public class RefactoringController {
     /*
      * Редактирование информации об учащемся
      */
+    @Logger
     @RequestMapping(value = "/refactor_student", method = RequestMethod.POST)
     public String refactorStudentPOST(@RequestParam(required = false) String lastName,
                                       @RequestParam(required = false) String firstName,
@@ -50,16 +59,23 @@ public class RefactoringController {
     /*
      * Отображение страницы для редактирования информации об преподавателе
      */
+    @Logger
+    @Admin
     @RequestMapping(value = "/refactor_teacher", method = RequestMethod.GET)
     public String refactorTeacherGET(@RequestParam(required = false) String teacherId,
                                      ModelMap model) {
         model.put("teacher", teacherService.getTeacher(Integer.parseInt(teacherId)));
+        model.put("teacherClasses", classesService.getClasses(Integer.parseInt(teacherId)));
+        model.put("AllClasses", classesService.getAllClasses());
+        model.put("teacherObjects", objectsService.getObjects(Integer.parseInt(teacherId)));
+        model.put("AllObjects", objectsService.getAllObjects());
         return "admin/teacher_info/refactor_teacher";
     }
 
     /*
      * Редактирование информации о преподавателе
      */
+    @Logger
     @RequestMapping(value = "/refactor_teacher", method = RequestMethod.POST)
     public String refactorTeacherPOST(@RequestParam(required = false) String lastName,
                                       @RequestParam(required = false) String firstName,
@@ -69,4 +85,35 @@ public class RefactoringController {
         return "redirect:/admin/teacher_list";
     }
 
+    /*
+     * Добавление нового предмета, который будет преподавать препод
+     */
+    @Logger
+    @ResponseBody
+    @RequestMapping(value = "/add_object", method = RequestMethod.POST)
+    public String addObject(@RequestParam String objectId,
+                            @RequestParam String teacherId) {
+        if (teacherService.addObject(Integer.parseInt(teacherId), Integer.parseInt(objectId))) {
+            return "ok";//если добавлен
+        }
+        return "no";
+    }
+
+    /*
+     * Добавление нового класса, в котором будет преподавать препод
+     */
+    @Logger
+    @ResponseBody
+    @RequestMapping(value = "/add_class", method = RequestMethod.POST)
+    public String addClass(@RequestParam String classId,
+                           @RequestParam String teacherId,
+                           @RequestParam String objectId) {
+        if (teacherService.addClass(
+                Integer.parseInt(classId),
+                Integer.parseInt(teacherId),
+                Integer.parseInt(objectId))) {
+            return "ok";//если добавлен
+        }
+        return "no";
+    }
 }
