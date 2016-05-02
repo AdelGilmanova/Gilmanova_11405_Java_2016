@@ -25,8 +25,8 @@ public class TeacherAspect {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (!user.equals("anonymousUser")) {
             String role = ((MyUserDetail) user).getUserEntity().getRole();
-            if (!role.equals("ROLE_TEACHER")) return "redirect:/";
+            if (role.equals("ROLE_TEACHER")) return jp.proceed();
         }
-        return jp.proceed();
+        return "redirect:/";
     }
 }

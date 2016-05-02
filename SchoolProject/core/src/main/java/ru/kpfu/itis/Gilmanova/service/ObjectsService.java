@@ -30,4 +30,8 @@ public class ObjectsService {
     public List<ObjectsEntity> getAllObjects() {
         return objectsRepository.getAllObjects();
     }
+
+    public void setObjectsRepository(ObjectsRepository objectsRepository) {
+        this.objectsRepository = objectsRepository;
+    }
 }

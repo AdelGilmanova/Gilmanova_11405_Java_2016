@@ -9,6 +9,7 @@ function send() {
         data: msg,
         success: function (data) {
             if (data == 'ok') {
+                location.reload();
                 alert("Задание отправлено.");
                 $('#formx').find('input[type=text], textarea').val('');
             }

@@ -1,3 +1,5 @@
+package ru.kpfu.itis.Gilmanova.util;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 

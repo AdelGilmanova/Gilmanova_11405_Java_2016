@@ -15,6 +15,14 @@ public class ClassesEntity {
     private List<ClassTeacherObjectEntity> class_teacher_object_id;
     private List<StudentsEntity> student_id;
 
+    public ClassesEntity() {
+    }
+
+    public ClassesEntity(String clazz, TeachersEntity teachersByTeacherId) {
+        this.clazz = clazz;
+        this.teachersByTeacherId = teachersByTeacherId;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -19,7 +19,7 @@ public class HomeWorkEntity {
     public HomeWorkEntity() {
     }
 
-    public HomeWorkEntity(String homeWork, ClassTeacherObjectEntity classTeacherObjectById,Time time, Date date ) {
+    public HomeWorkEntity(String homeWork, ClassTeacherObjectEntity classTeacherObjectById, Time time, Date date) {
         this.homeWork = homeWork;
         this.classTeacherObjectById = classTeacherObjectById;
         this.time = time;

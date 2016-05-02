@@ -51,7 +51,6 @@
             <list>
                 <value>ru.kpfu.itis.Gilmanova.model.CommentsEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.ObjectsEntity</value>
-                <value>ru.kpfu.itis.Gilmanova.model.QuestionsEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.StudentsEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.TeachersEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.UsersEntity</value>

@@ -13,6 +13,13 @@ public class ObjectsEntity {
     private String object;
     private List<TeacherObjectEntity> teacher_object;
 
+    public ObjectsEntity() {
+    }
+
+    public ObjectsEntity(String object) {
+        this.object = object;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -39,4 +39,8 @@ public class ClassesService {
     public ClassesEntity getClazz(Integer classId){
         return classesRepositoryJPA.getClassById(classId);
     }
+
+    public void setClassesRepository(ClassesRepository classesRepository) {
+        this.classesRepository = classesRepository;
+    }
 }

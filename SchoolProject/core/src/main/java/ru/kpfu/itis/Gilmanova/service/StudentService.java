@@ -55,4 +55,7 @@ public class StudentService {
         studentRepository.changedStudentInfo(studentId, lastName, firstName, classTd);
     }
 
+    public void setStudentRepository(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 }

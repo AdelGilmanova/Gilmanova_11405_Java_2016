@@ -7,8 +7,8 @@
 <#macro left_block>
 <div class="comment-block">
     <h3><a href="/teacher" class="cabinet-link">Личный кабинет</a> - Задать домашнее задание</h3>
-
     <p>Преподаватель: ${(teacher.getLastName())!} ${(teacher.getFirstName())!} ${(teacher.getSecondName())!}</p>
+    <p>Кол-во заданных домашних заданий: <#if home_work??>${home_work}<#else>0</#if></p>
     <br>
 
     <form id="formx" action="javascript:void(null);" onsubmit="send()">

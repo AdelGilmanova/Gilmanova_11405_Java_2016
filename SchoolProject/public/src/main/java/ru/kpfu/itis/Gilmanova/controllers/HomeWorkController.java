@@ -17,6 +17,8 @@ import ru.kpfu.itis.Gilmanova.service.HomeWorkService;
 import ru.kpfu.itis.Gilmanova.service.ObjectsService;
 import ru.kpfu.itis.Gilmanova.service.TeacherService;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Контроллер для добавление новых домашек преподавателем
  * Created by Adel on 17.04.2016.
@@ -37,13 +39,20 @@ public class HomeWorkController extends BaseController {
     @Teacher
     @RequestMapping(method = RequestMethod.GET)
     public String renderHomeWork(ModelMap model) {
-        //TODO проверку роли, вынести в around аспект
         MyUserDetail user = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer userId = user.getUserEntity().getId();
         TeachersEntity teachersEntity = teacherService.getTeacherByUserId(userId);
         model.put("classes", classesService.getClasses(teachersEntity.getId()));
         model.put("teacher", teacherService.getTeacher(teachersEntity.getId()));
         model.put("objects", objectsService.getObjects(teachersEntity.getId()));
+        model.put("home_work", request.getSession().getAttribute("amount"));
+//        Cookie cookies[] = request.getCookies();
+//        for (Cookie cookie : cookies) {
+//            if (cookie.getName().equals("home_work")) {
+//                model.put("home_work", cookie.getValue());
+//                break;
+//            }
+//        }
         return "home_works";
     }
 
@@ -54,11 +63,35 @@ public class HomeWorkController extends BaseController {
     public String addHomeWork(@RequestParam(required = false) String classId,
                               @RequestParam(required = false) String objectId,
                               @RequestParam(required = false) String teacherId,
-                              @RequestParam(required = false) String home_work) {
+                              @RequestParam(required = false) String home_work,
+                              ModelMap model) {
         homeWorkService.addHomeWork(Integer.parseInt(classId),
                 Integer.parseInt(objectId),
                 Integer.parseInt(teacherId),
                 home_work);
+        HttpSession session = request.getSession();
+        Integer amount = (Integer) session.getAttribute("amount");
+        if (amount != null) session.setAttribute("amount", amount + 1);
+        else session.setAttribute("amount", 1);
+
+//        Cookie cookies[] = request.getCookies();
+//        boolean pr = false;
+//        for (Cookie cookie : cookies) {
+//            if (cookie.getName().equals("home_work")) {
+//                Integer value = Integer.parseInt(cookie.getValue());
+//                value += 1;
+//                Cookie c = new Cookie("home_work", String.valueOf(value));
+//                c.setMaxAge(60 * 60 * 5);
+//                response.addCookie(c);
+//                pr = true;
+//                break;
+//            }
+//        }
+//        if (!pr) {
+//            Cookie cookie = new Cookie("home_work", String.valueOf(1));
+//            cookie.setMaxAge(60 * 60 * 5);
+//            response.addCookie(cookie);
+//        }
         return "ok";
     }
 }

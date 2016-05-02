@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.kpfu.itis.Gilmanova.model.*;
+import ru.kpfu.itis.Gilmanova.repository.jpa.TeacherRepositoryJPA;
 import ru.kpfu.itis.Gilmanova.service.ClassesService;
 import ru.kpfu.itis.Gilmanova.service.ObjectsService;
 
@@ -22,13 +23,16 @@ public class TeacherRepository {
     private ObjectsService objectsService;
     @Autowired
     private ClassesService classesService;
+    @Autowired
+    private TeacherRepositoryJPA teacherRepositoryJPA;
 
     /*
      * Возвращает учителя по userId
      */
     public TeachersEntity getTeacherByUserId(Integer userId) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(TeachersEntity.class);
-        return (TeachersEntity) crit.add(Restrictions.eq("usersEntity.id", userId)).uniqueResult();
+        crit.add(Restrictions.eq("usersEntity.id", userId));
+        return (TeachersEntity) crit.uniqueResult();
     }
 
     /*
@@ -101,7 +105,7 @@ public class TeacherRepository {
      * Добавление новой связи препод-предмет
      */
     public void addObject(Integer teacherId, Integer objectId) {
-        TeachersEntity teachersEntity = getTeacherByUserId(teacherId);
+        TeachersEntity teachersEntity = teacherRepositoryJPA.getTeacherById(teacherId);
         ObjectsEntity objectsEntity = objectsService.getObject(objectId);
         TeacherObjectEntity entity = new TeacherObjectEntity(teachersEntity, objectsEntity);
         sessionFactory.getCurrentSession().save(entity);
@@ -139,4 +143,9 @@ public class TeacherRepository {
         ClassTeacherObjectEntity classTeacherObjectEntity = new ClassTeacherObjectEntity(classesEntity, teacherObjectEntity);
         sessionFactory.getCurrentSession().save(classTeacherObjectEntity);
     }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
 }

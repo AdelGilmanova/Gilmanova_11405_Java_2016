@@ -72,4 +72,11 @@ public class TeacherService {
         return false;
     }
 
+    public void setTeacherRepository(TeacherRepository teacherRepository) {
+        this.teacherRepository = teacherRepository;
+    }
+
+    public void setTeacherRepositoryJPA(TeacherRepositoryJPA teacherRepositoryJPA) {
+        this.teacherRepositoryJPA = teacherRepositoryJPA;
+    }
 }

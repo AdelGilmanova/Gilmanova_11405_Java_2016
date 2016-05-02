@@ -23,7 +23,8 @@ public class StudentRepository {
      */
     public StudentsEntity getStudentByUserId(Integer userId) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(StudentsEntity.class);
-        return (StudentsEntity) crit.add(Restrictions.eq("usersEntity.id", userId)).uniqueResult();
+        crit.add(Restrictions.eq("usersEntity.id", userId));
+        return (StudentsEntity) crit.uniqueResult();
     }
 
     /*
@@ -31,7 +32,8 @@ public class StudentRepository {
      */
     public StudentsEntity getStudent(Integer studentId) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(StudentsEntity.class);
-        return (StudentsEntity) crit.add(Restrictions.eq("id", studentId)).uniqueResult();
+        crit.add(Restrictions.eq("id", studentId));
+        return (StudentsEntity) crit.uniqueResult();
     }
 
     /*
@@ -50,7 +52,8 @@ public class StudentRepository {
     @SuppressWarnings("unchecked")
     public List<StudentsEntity> getStudentByClass(Integer classId) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(StudentsEntity.class);
-        crit.createAlias("class_id", "class").add(Restrictions.eq("class.id", classId));
+        crit.createAlias("class_id", "class");
+        crit.add(Restrictions.eq("class.id", classId));
         crit.addOrder(org.hibernate.criterion.Order.asc("id"));
         return crit.list();
     }
@@ -100,4 +103,7 @@ public class StudentRepository {
         sessionFactory.getCurrentSession().update(student);
     }
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }

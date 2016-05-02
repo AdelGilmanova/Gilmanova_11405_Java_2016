@@ -12,7 +12,6 @@ import ru.kpfu.itis.Gilmanova.model.UsersEntity;
 import ru.kpfu.itis.Gilmanova.repository.jpa.ClassesRepositoryJPA;
 
 import java.sql.Date;
-import java.util.List;
 
 /**
  * Created by Adel on 07.03.2016.
@@ -29,15 +28,8 @@ public class UsersRepository {
      */
     public UsersEntity getUser(String login) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(UsersEntity.class);
-        return (UsersEntity) crit.add(Restrictions.eq("username", login)).uniqueResult();
-    }
-
-    /*
-     * Достает пользовалеля по id
-     */
-    public UsersEntity getUser(Integer id) {
-        Criteria crit = sessionFactory.getCurrentSession().createCriteria(UsersEntity.class);
-        return (UsersEntity) crit.add(Restrictions.eq("id", id)).uniqueResult();
+        crit.add(Restrictions.eq("username", login));
+        return (UsersEntity) crit.uniqueResult();
     }
 
     /*
@@ -52,16 +44,6 @@ public class UsersRepository {
     }
 
     /*
-     * Получение списка всех учащихся из таблицы Users
-     */
-    @SuppressWarnings("unchecked")
-    public List<UsersEntity> getStudents() {
-        Criteria crit = sessionFactory.getCurrentSession().createCriteria(UsersEntity.class);
-        crit.add(Restrictions.eq("role", "ROLE_STUDENT"));
-        return crit.list();
-    }
-
-    /*
      * Добавление нового пользователя-преподаватель в бд
      */
     public void addUser(String lastName, String firstName, String secondName, Date birthday, String gender,
@@ -71,5 +53,9 @@ public class UsersRepository {
         TeachersEntity teachersEntity = new TeachersEntity(lastName, firstName, secondName, gender, birthday, photo, user);
         sessionFactory.getCurrentSession().save(user);
         sessionFactory.getCurrentSession().save(teachersEntity);
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

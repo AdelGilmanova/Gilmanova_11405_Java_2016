@@ -17,19 +17,17 @@ import ru.kpfu.itis.Gilmanova.service.TeacherService;
  */
 @Controller
 @RequestMapping("/teacher")
-public class TeacherController extends BaseController{
+public class TeacherController extends BaseController {
     @Autowired
     private TeacherService teacherService;
 
     @Logger
     @Teacher
-    @RequestMapping(method= RequestMethod.GET)
-    public String renderTeacher(ModelMap model){
+    @RequestMapping(method = RequestMethod.GET)
+    public String renderTeacher(ModelMap model) {
         MyUserDetail user = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String login = user.getUserEntity().getUsername();
         Integer userId = user.getUserEntity().getId();
         model.put("teacher", teacherService.getTeacherByUserId(userId));
-        model.put("login", login);
         return "teachers_page";
     }
 }

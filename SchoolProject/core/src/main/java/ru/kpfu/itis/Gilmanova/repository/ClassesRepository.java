@@ -37,4 +37,7 @@ public class ClassesRepository {
         return crit.list();
     }
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }

@@ -31,4 +31,8 @@ public class UsersService {
                         String login, String hash_pass) {
         usersRepository.addUser(lastName, firstName, secondName, date, gender, login, hash_pass);
     }
+
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
 }

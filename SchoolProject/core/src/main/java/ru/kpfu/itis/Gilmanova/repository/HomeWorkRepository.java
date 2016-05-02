@@ -46,4 +46,8 @@ public class HomeWorkRepository {
         HomeWorkEntity homeWork = new HomeWorkEntity(home_work, classTeacherObjectEntity, time, date);
         sessionFactory.getCurrentSession().save(homeWork);
     }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }

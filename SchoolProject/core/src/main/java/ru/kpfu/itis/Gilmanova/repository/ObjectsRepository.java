@@ -21,8 +21,9 @@ public class ObjectsRepository {
      * Возвращает предмет по его id
      */
     public ObjectsEntity getObject(int objectId) {
-        return (ObjectsEntity) sessionFactory.getCurrentSession().createCriteria(ObjectsEntity.class)
-                .add(Restrictions.eq("id", objectId)).uniqueResult();
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(ObjectsEntity.class);
+        crit.add(Restrictions.eq("id", objectId));
+        return (ObjectsEntity) crit.uniqueResult();
     }
 
     /*
@@ -31,8 +32,8 @@ public class ObjectsRepository {
     @SuppressWarnings("unchecked")
     public List<ObjectsEntity> getObjects(Integer teacherId) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(ObjectsEntity.class);
-        crit.createAlias("teacher_object", "teacher_object")
-                .add(Restrictions.eq("teacher_object.teachersByTeacherId.id", teacherId));
+        crit.createAlias("teacher_object", "teacher_object");
+        crit.add(Restrictions.eq("teacher_object.teachersByTeacherId.id", teacherId));
         crit.addOrder(org.hibernate.criterion.Order.desc("object"));
         return crit.list();
     }
@@ -43,5 +44,9 @@ public class ObjectsRepository {
     @SuppressWarnings("unchecked")
     public List<ObjectsEntity> getAllObjects() {
         return sessionFactory.getCurrentSession().createCriteria(ObjectsEntity.class).list();
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 }

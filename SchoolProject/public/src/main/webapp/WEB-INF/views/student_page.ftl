@@ -7,7 +7,10 @@
 
 <div class="comment-block">
     <h2 align="center">Домашние задания</h2>
-
+    <p align="right">
+        <a href="/student/home_works/download?classId=${(student.getClass_id().getId())!}"
+           style="color:black">Скачать</a>
+    </p>
     <#if home_works?has_content>
         <#list home_works as home_work>
             <li>${home_work.getClassTeacherObjectById().getTeacher_object_id().getObjectsEntity().getObject()}<br>

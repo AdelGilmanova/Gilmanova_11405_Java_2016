@@ -45,4 +45,8 @@ public class CommentsRepository {
         CommentsEntity comment = (CommentsEntity) crit.add(Restrictions.eq("id", commentId)).uniqueResult();
         sessionFactory.getCurrentSession().delete(comment);
     }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }

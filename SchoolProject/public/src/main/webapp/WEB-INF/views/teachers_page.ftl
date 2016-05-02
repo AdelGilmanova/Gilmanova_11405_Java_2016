@@ -17,7 +17,7 @@
     <h1 align="center">Личный кабинет</h1>
     <h2>Моя анкета</h2>
     <p>Имя: ${(teacher.getLastName())!} ${(teacher.getFirstName())!} ${(teacher.getSecondName())!}</p>
-    <p>Логин: ${(login)!}</p>
+    <p>Логин: ${(teacher.getUsersEntity().getUsername())!}</p>
     <p>Должность: Учитель</p>
     <p>Дата рождения: ${(teacher.getBirthday())!}</p>
     <p>Пол: ${(teacher.getGender())!}</p>

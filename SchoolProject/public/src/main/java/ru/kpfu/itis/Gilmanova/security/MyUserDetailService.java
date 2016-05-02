@@ -22,5 +22,4 @@ public class MyUserDetailService implements UserDetailsService {
         if (userInfo == null) throw new UsernameNotFoundException("User with name " + username + " not found");
         return new MyUserDetail(userInfo);
     }
-
 }

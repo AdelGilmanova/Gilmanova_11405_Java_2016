@@ -25,8 +25,8 @@ public class AdminAspect {
         Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (!user.equals("anonymousUser")) {
             String role = ((MyUserDetail) user).getUserEntity().getRole();
-            if (!role.equals("ROLE_ADMIN")) return "redirect:/";
+            if (role.equals("ROLE_ADMIN")) return jp.proceed();
         }
-        return jp.proceed();
+        return "redirect:/";
     }
 }
