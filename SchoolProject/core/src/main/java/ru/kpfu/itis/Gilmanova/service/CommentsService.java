@@ -25,9 +25,10 @@ public class CommentsService {
     }
 
     @Transactional
-    public void addComment(String name, String text) {
+    public int addComment(String name, String text) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR, -1);
+        calendar.add(Calendar.MONTH, 1);
         String t = calendar.get(Calendar.HOUR_OF_DAY) + ":" +
                 calendar.get(Calendar.MINUTE)+ ":" +calendar.get(Calendar.SECOND);
         String d = calendar.get(Calendar.YEAR) + "-" +
@@ -35,7 +36,7 @@ public class CommentsService {
         Time time = Time.valueOf(t);
         Date date = Date.valueOf(d);
 
-        commentsRepository.addComment(name, text, time, date);
+        return commentsRepository.addComment(name, text, time, date);
     }
 
 

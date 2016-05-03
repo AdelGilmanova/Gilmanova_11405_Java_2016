@@ -25,6 +25,8 @@ public class CommentsRepository {
     @SuppressWarnings("unchecked")
     public List<CommentsEntity> getComments() {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(CommentsEntity.class);
+        cr.addOrder(org.hibernate.criterion.Order.desc("date"));
+        cr.addOrder(org.hibernate.criterion.Order.desc("time"));
         return cr.list();
     }
 
@@ -32,9 +34,10 @@ public class CommentsRepository {
      * Добавление нового комментария в бд
      */
     @SuppressWarnings("unchecked")
-    public void addComment(String name, String text, Time time, Date date) {
+    public int addComment(String name, String text, Time time, Date date) {
         CommentsEntity commentsEntity = new CommentsEntity(name, text, time, date);
         sessionFactory.getCurrentSession().save(commentsEntity);
+        return commentsEntity.getId();
     }
 
     /*

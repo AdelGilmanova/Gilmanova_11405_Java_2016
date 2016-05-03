@@ -46,13 +46,7 @@ public class HomeWorkController extends BaseController {
         model.put("teacher", teacherService.getTeacher(teachersEntity.getId()));
         model.put("objects", objectsService.getObjects(teachersEntity.getId()));
         model.put("home_work", request.getSession().getAttribute("amount"));
-//        Cookie cookies[] = request.getCookies();
-//        for (Cookie cookie : cookies) {
-//            if (cookie.getName().equals("home_work")) {
-//                model.put("home_work", cookie.getValue());
-//                break;
-//            }
-//        }
+
         return "home_works";
     }
 
@@ -73,24 +67,6 @@ public class HomeWorkController extends BaseController {
         if (amount != null) session.setAttribute("amount", amount + 1);
         else session.setAttribute("amount", 1);
 
-//        Cookie cookies[] = request.getCookies();
-//        boolean pr = false;
-//        for (Cookie cookie : cookies) {
-//            if (cookie.getName().equals("home_work")) {
-//                Integer value = Integer.parseInt(cookie.getValue());
-//                value += 1;
-//                Cookie c = new Cookie("home_work", String.valueOf(value));
-//                c.setMaxAge(60 * 60 * 5);
-//                response.addCookie(c);
-//                pr = true;
-//                break;
-//            }
-//        }
-//        if (!pr) {
-//            Cookie cookie = new Cookie("home_work", String.valueOf(1));
-//            cookie.setMaxAge(60 * 60 * 5);
-//            response.addCookie(cookie);
-//        }
         return "ok";
     }
 }

@@ -28,6 +28,7 @@ public class HomeWorkService {
     public void addHomeWork(Integer classId, Integer objectId, Integer teacherId, String home_work) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR, -1);
+        calendar.add(Calendar.MONTH, 1);
         String t = calendar.get(Calendar.HOUR_OF_DAY) + ":" +
                 calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND);
         String d = calendar.get(Calendar.YEAR) + "-" +

@@ -11,7 +11,12 @@ import org.springframework.ui.ModelMap;
 import ru.kpfu.itis.Gilmanova.controllers.CommentsController;
 import ru.kpfu.itis.Gilmanova.service.CommentsService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Adel on 02.05.2016.
@@ -23,20 +28,21 @@ public class CommentsControllerTest {
     private static CommentsController commentsController;
     @Mock
     private static CommentsService commentsService;
+    @Mock
+    private static HttpServletResponse response;
+    @Mock
+    private static HttpServletRequest request;
 
     @Test
-    public void renderCommentsShouldBeRight(){
+    public void renderCommentsShouldBeRight() {
         ModelMap model = mock(ModelMap.class);
+        Cookie[] cookie = {};
+        when(request.getCookies()).thenReturn(cookie);
         Assert.assertEquals("comments", commentsController.renderComments(model));
     }
 
     @Test
-    public void addCommentsShouldBeRight(){
-        Assert.assertEquals("redirect:/comments", commentsController.addComments("", ""));
-    }
-
-    @Test
-    public void deleteCommentShouldBeRight(){
+    public void deleteCommentShouldBeRight() {
         Assert.assertEquals("redirect:/comments", commentsController.deleteComment("1"));
     }
 }

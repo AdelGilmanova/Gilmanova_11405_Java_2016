@@ -1,7 +1,6 @@
 package controllers;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,10 +20,7 @@ import ru.kpfu.itis.Gilmanova.service.ClassesService;
 import ru.kpfu.itis.Gilmanova.service.HomeWorkService;
 import ru.kpfu.itis.Gilmanova.service.StudentService;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 import static org.mockito.Matchers.anyInt;
@@ -74,17 +70,6 @@ public class StudentControllerTest {
         when(studentService.getStudentByUserId(anyInt())).thenReturn(studentsEntity);
         when(homeWorkService.getHomeWorksByClassId(anyInt())).thenReturn(list);
         Assert.assertEquals("student_page", studentController.renderStudentPage(model));
-    }
-
-    @Ignore
-    @Test
-    public void downloadHomeWorkShouldBeRight() throws IOException {
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        ServletContext servletContext = mock(ServletContext.class);
-        when(request.getServletContext()).thenReturn(servletContext);
-        when(servletContext.getRealPath("/resources/fonts/")).thenReturn("/resources/fonts/");
-        when(classesService.getClazz(1)).thenReturn(classesEntity);
-        Assert.assertEquals("redirect:/student/home_works", studentController.downloadHomeWork(response, "1"));
     }
 
 }
