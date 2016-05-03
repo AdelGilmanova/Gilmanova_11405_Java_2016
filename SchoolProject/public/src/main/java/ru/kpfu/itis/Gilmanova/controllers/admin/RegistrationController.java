@@ -14,7 +14,6 @@ import ru.kpfu.itis.Gilmanova.controllers.BaseController;
 import ru.kpfu.itis.Gilmanova.form.StudentRegistrationFormBean;
 import ru.kpfu.itis.Gilmanova.form.TeacherRegistrationFormBean;
 import ru.kpfu.itis.Gilmanova.service.ClassesService;
-import ru.kpfu.itis.Gilmanova.service.StudentService;
 import ru.kpfu.itis.Gilmanova.service.UsersService;
 
 import javax.validation.Valid;
@@ -35,8 +34,6 @@ public class RegistrationController extends BaseController {
     private ClassesService classesService;
     @Autowired
     private UsersService usersService;
-    @Autowired
-    private StudentService studentService;
 
     /*
      * Отображение формы по добавлению нового учащегося

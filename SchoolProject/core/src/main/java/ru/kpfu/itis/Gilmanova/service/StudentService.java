@@ -54,8 +54,4 @@ public class StudentService {
     public void changedStudentInfo(Integer studentId, String lastName, String firstName, Integer classTd) {
         studentRepository.changedStudentInfo(studentId, lastName, firstName, classTd);
     }
-
-    public void setStudentRepository(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
 }

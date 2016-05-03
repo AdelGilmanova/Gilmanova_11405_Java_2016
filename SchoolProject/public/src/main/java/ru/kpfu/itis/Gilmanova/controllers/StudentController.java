@@ -55,7 +55,7 @@ public class StudentController extends BaseController {
     }
 
     /*
-     * Скачивает документ
+     * Cкачивания документа
      */
     @Logger
     @Student

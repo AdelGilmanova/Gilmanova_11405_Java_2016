@@ -10,7 +10,7 @@ import ru.kpfu.itis.Gilmanova.aspects.annotations.Logger;
  * Created by Adel on 07.04.2016.
  */
 @Controller
-public class AnonimusController extends BaseController {
+public class AnonymousController extends BaseController {
 
     @Logger
     @RequestMapping(value = "/information",method = RequestMethod.GET)

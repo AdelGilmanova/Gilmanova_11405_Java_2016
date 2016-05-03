@@ -31,7 +31,4 @@ public class ObjectsService {
         return objectsRepository.getAllObjects();
     }
 
-    public void setObjectsRepository(ObjectsRepository objectsRepository) {
-        this.objectsRepository = objectsRepository;
-    }
 }

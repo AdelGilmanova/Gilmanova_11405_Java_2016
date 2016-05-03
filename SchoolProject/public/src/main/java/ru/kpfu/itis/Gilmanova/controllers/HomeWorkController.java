@@ -63,8 +63,7 @@ public class HomeWorkController extends BaseController {
     public String addHomeWork(@RequestParam(required = false) String classId,
                               @RequestParam(required = false) String objectId,
                               @RequestParam(required = false) String teacherId,
-                              @RequestParam(required = false) String home_work,
-                              ModelMap model) {
+                              @RequestParam(required = false) String home_work) {
         homeWorkService.addHomeWork(Integer.parseInt(classId),
                 Integer.parseInt(objectId),
                 Integer.parseInt(teacherId),

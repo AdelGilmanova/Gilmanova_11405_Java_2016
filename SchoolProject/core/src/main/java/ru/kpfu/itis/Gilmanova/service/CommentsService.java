@@ -43,8 +43,4 @@ public class CommentsService {
     public void deleteComment(Integer commentId) {
         commentsRepository.deleteComment(commentId);
     }
-
-    public void setCommentsRepository(CommentsRepository commentsRepository) {
-        this.commentsRepository = commentsRepository;
-    }
 }

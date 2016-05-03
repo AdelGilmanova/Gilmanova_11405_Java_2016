@@ -37,7 +37,4 @@ public class HomeWorkService {
         homeWorkRepository.addHomeWork(classId, objectId, teacherId, home_work, time, date);
     }
 
-    public void setHomeWorkRepository(HomeWorkRepository homeWorkRepository) {
-        this.homeWorkRepository = homeWorkRepository;
-    }
 }
