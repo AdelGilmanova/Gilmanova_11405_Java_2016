@@ -12,6 +12,12 @@
                 <li><a href="/admin/teacher_list">преподавателей</a></li>
             </ul>
         </li>
+        <li>Управление
+            <ul>
+                <li><a href="/comments">комментариями</a></li>
+                <li><a href="/admin/show_questions">вопросами пользователей</a></li>
+            </ul>
+        </li>
         <li>Зарегестрировать
             <ul>
                 <li><a href="/admin/add_student">нового учащегося</a></li>

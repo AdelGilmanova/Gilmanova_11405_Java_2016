@@ -58,6 +58,7 @@
                 <value>ru.kpfu.itis.Gilmanova.model.ClassesEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.ClassTeacherObjectEntity</value>
                 <value>ru.kpfu.itis.Gilmanova.model.HomeWorkEntity</value>
+                <value>ru.kpfu.itis.Gilmanova.model.QuestionsEntity</value>
             </list>
         </property>
     </bean>

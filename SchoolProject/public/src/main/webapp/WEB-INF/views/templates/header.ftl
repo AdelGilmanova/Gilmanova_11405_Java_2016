@@ -16,11 +16,12 @@
 <@sec.authorize ifNotGranted="ROLE_ADMIN">
     <span><a href="/information">О Гимназии</a></span>
     <span><a href="/for_parents">Родителям</a></span>
+    <span><a href="/ask">Приемная директора</a></span>
+    <span><a href="/comments">Отзывы</a></span>
 </@sec.authorize>
 <@sec.authorize ifAnyGranted="ROLE_ADMIN">
     <span><a href="/admin">Кабинет</a></span>
 </@sec.authorize>
-    <span><a href="/comments">Отзывы</a></span>
 </div>
 
 
