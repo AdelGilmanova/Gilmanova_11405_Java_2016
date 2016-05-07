@@ -33,7 +33,10 @@ public class QuestionsRepository {
      */
     @SuppressWarnings("unchecked")
     public List<QuestionsEntity> getAllQuestions() {
-        return sessionFactory.getCurrentSession().createCriteria(QuestionsEntity.class).list();
+        Criteria crit = sessionFactory.getCurrentSession().createCriteria(QuestionsEntity.class);
+        crit.addOrder(org.hibernate.criterion.Order.desc("questionDate"));
+        crit.addOrder(org.hibernate.criterion.Order.desc("questionTime"));
+        return crit.list();
     }
 
     /*

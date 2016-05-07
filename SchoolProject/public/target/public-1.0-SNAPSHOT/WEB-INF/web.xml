@@ -117,4 +117,14 @@
         <error-code>404</error-code>
         <location>/error404</location>
     </error-page>
+
+    <!-- GWT-->
+    <servlet>
+        <servlet-name>gwt</servlet-name>
+        <servlet-class>ru.kpfu.itis.Gilmanova.gwt.server.MySampleApplicationServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>gwt</servlet-name>
+        <url-pattern>/MySampleApplication/MySampleApplicationService</url-pattern>
+    </servlet-mapping>
 </web-app>

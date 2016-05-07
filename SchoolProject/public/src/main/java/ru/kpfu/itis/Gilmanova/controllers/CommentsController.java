@@ -30,7 +30,7 @@ public class CommentsController extends BaseController {
         model.put("comments", commentsService.getComments());
         Cookie cookies[] = request.getCookies();
         for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("comment")) {
+            if (cookie.getName().equals("comments")) {
                 String[] arr = cookie.getValue().split(", ");
                 Integer[] comments = new Integer[arr.length];
                 for (int i = 0; i < arr.length; i++) comments[i] = Integer.parseInt(arr[i]);
@@ -55,21 +55,19 @@ public class CommentsController extends BaseController {
         Cookie cookies[] = request.getCookies();
         boolean pr = false;
         for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("comment")) {
-                Cookie c = new Cookie("comment", cookie.getValue() + ", " + commentId);
-                c.setMaxAge(60 * 60);
+            if (cookie.getName().equals("comments")) {
+                Cookie c = new Cookie("comments", cookie.getValue() + ", " + commentId);
+                c.setMaxAge(60 * 60 * 24 * 30);
                 response.addCookie(c);
                 pr = true;
                 break;
             }
         }
         if (!pr) {
-            Cookie c = new Cookie("comment", String.valueOf(commentId));
-            c.setMaxAge(60 * 60);
+            Cookie c = new Cookie("comments", String.valueOf(commentId));
+            c.setMaxAge(60 * 60 * 24 * 30);
             response.addCookie(c);
         }
-
-
         return "redirect:/comments";
     }
 

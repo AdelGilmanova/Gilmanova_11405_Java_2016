@@ -6,8 +6,6 @@
 
     <context:component-scan base-package="ru.kpfu.itis.Gilmanova.service"/>
 
-    <!--<import resource="spring-jdbc.xml" />-->
-
     <import resource="spring-jpa.xml" />
 
     <import resource="spring-hibernate.xml" />
