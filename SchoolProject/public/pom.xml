@@ -111,6 +111,12 @@
             <version>1.2.17</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+
         <!-- md5-->
         <dependency>
             <groupId>commons-codec</groupId>
@@ -135,15 +141,20 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-servlet</artifactId>
             <version>${gwt.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
+            <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -162,15 +173,51 @@
                     <skip>false</skip>
                 </configuration>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>gwt-maven-plugin</artifactId>-->
+                <!--<version>2.4.0</version>-->
+                <!--<configuration>-->
+                    <!--<bindAddress>0.0.0.0</bindAddress>-->
+                    <!--<runTarget>/app</runTarget>-->
+                    <!--<port>7000</port>-->
+                    <!--<hostedWebapp>-->
+                        <!--${project.build.directory}/${project.build.finalName}-->
+                    <!--</hostedWebapp>-->
+                    <!--<draftCompile>true</draftCompile>-->
+                    <!--<module>app.gwt.GwtExample</module>-->
+                    <!--<systemProperties>-->
+                        <!--<activejdbc.log>.*</activejdbc.log>-->
+                        <!--<active_reload>true</active_reload>-->
+                        <!--<activeweb.log.request>true</activeweb.log.request>-->
+                    <!--</systemProperties>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>compile</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<dependencies>-->
+                    <!--<dependency>-->
+                        <!--<groupId>com.google.gwt</groupId>-->
+                        <!--<artifactId>gwt-dev</artifactId>-->
+                        <!--<version>${gwt.version}</version>-->
+                    <!--</dependency>-->
+                <!--</dependencies>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>${gwt.version}</version>
+                <version>2.4.0</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>compile</goal>
                             <goal>test</goal>
+                            <goal>i18n</goal>
+                            <goal>generateAsync</goal>
                         </goals>
                     </execution>
                 </executions>

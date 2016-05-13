@@ -1,18 +1,18 @@
 <#include "templates/main_template.ftl">
 <@main_template scripts=["ask_question.js"]/>
-
+<script type="text/javascript" language="javascript"
+        src="../app/app.nocache.js"></script>
 <#macro left_block>
 <div class="question-block">
     <h2 align="center">Задать вопрос</h2>
     <br>
-    <form id="formx" action="javascript:void(null);" onsubmit="send()">
-        <p>Тема вопроса: <input required type="text" name="theme" size="57"/></p>
-        <p align="left">Описание вопроса:</p>
-        <p><textarea name='text' onblur="validateLength(this)" rows='10' cols='76'></textarea></p>
-        <p>Ваше имя: <input required type="text" name="name" size="60"/></p>
-        <p>Ваш email: <input required type="text" name="email" onblur="validateEmail(this)" size="60"/></p>
-        <p><input type="submit" id="ask" value="Отправить"/></p>
-    </form>
+    <p>Тема вопроса: <div id="theme"></div>
+    <p align="left">Описание вопроса:</p>
+    <p><span id="text"></span>
+    <p>Ваше имя: <span id="name"></span>
+    <p>Ваш email: <span id="email">
+        <p><span id="add"></span></p>
+
 </div>
 </#macro>
 

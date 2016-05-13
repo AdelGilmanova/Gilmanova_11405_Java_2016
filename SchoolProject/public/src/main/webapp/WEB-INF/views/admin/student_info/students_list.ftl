@@ -20,6 +20,7 @@
             </#if>
         </select>
         <button>Поиск</button>
+        <button id="slot1">Поиск на gwt</button>
     </form>
     <br><br>
 

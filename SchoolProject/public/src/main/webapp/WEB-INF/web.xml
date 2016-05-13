@@ -118,13 +118,23 @@
         <location>/error404</location>
     </error-page>
 
-    <!-- GWT-->
+    <!--GWT-->
     <servlet>
         <servlet-name>gwt</servlet-name>
-        <servlet-class>ru.kpfu.itis.Gilmanova.gwt.server.MySampleApplicationServiceImpl</servlet-class>
+        <servlet-class>ru.kpfu.itis.Gilmanova.gwt.server.QuestionServiceImpl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>gwt</servlet-name>
-        <url-pattern>/MySampleApplication/MySampleApplicationService</url-pattern>
+        <url-pattern>/app/MySampleApplicationService</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>file</servlet-name>
+        <jsp-file>/app.html</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>file</servlet-name>
+        <url-pattern>/app</url-pattern>
+    </servlet-mapping>
+
 </web-app>
