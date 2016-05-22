@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="200" prefWidth="300"
+            style="-fx-background-color: lightgrey"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ru.kpfu.itis.Gilmanova.controllers.LoginController">
+    <children>
+        <StackPane AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <Label text="Добро пожаловать!" prefHeight="10">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+        </StackPane>
+
+        <GridPane fx:id="gridPane" AnchorPane.topAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+           <children>
+                <Label text="Имя пользователя" prefWidth="200"
+                       GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="username" prefWidth="200"
+                           GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label text="Пароль" prefWidth="200"
+                       GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <PasswordField fx:id="password" prefWidth="200"
+                               GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <Button onAction="#login" text="Войти"
+                        GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            </children>
+        </GridPane>
+   </children>
+</AnchorPane>

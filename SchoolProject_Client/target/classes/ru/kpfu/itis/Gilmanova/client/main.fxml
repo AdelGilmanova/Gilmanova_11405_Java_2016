@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="500.0"
+            prefWidth="550.0"
+            style="-fx-background-color: gainsboro;"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.kpfu.itis.Gilmanova.controllers.MainController">
+
+    <children>
+        <StackPane fx:id="view"
+                   AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"
+                   AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="30.0">
+            <Label text="Добро пожаловать!" prefHeight="300.0">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+        </StackPane>
+        <HBox fx:id="taskbar"
+              alignment="CENTER" layoutX="21.0" layoutY="207.0" prefHeight="50.0" prefWidth="300.0"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <children>
+                <Button onAction="#comments" text="Комментарии"/>
+                <Button onAction="#news" text="Новости"/>
+                <Button onAction="#cancel" text="Выход"/>
+            </children>
+        </HBox>
+
+    </children>
+</AnchorPane>
