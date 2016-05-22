@@ -18,8 +18,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import ru.kpfu.itis.Gilmanova.client.FXMLDialog;
+import ru.kpfu.itis.Gilmanova.client.ScreensConfiguration;
 import ru.kpfu.itis.Gilmanova.model.Comment;
+import ru.kpfu.itis.Gilmanova.security.MyUserDetail;
 import ru.kpfu.itis.Gilmanova.service.CommentModel;
 
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ import java.util.List;
 /**
  * Created by Adel on 18.05.2016.
  */
-
+@Component
 public class MainController implements DialogController {
     private FXMLDialog dialog;
 
@@ -43,6 +47,8 @@ public class MainController implements DialogController {
     @Autowired
     private CommentModel model;
     ObservableList<Comment> data;
+    @Autowired
+    ScreensConfiguration screens;
 
     @FXML
     public void comments(ActionEvent actionEvent) {
@@ -62,27 +68,22 @@ public class MainController implements DialogController {
         listView.setItems(data);
         grid.add(listView, 0, 1, 3, 1);
 
-        final TextField name = new TextField();
-        name.setPromptText("Ваше имя");
-        name.setPrefWidth(90);
-        grid.add(name, 0, 2);
-
         final TextField comment = new TextField();
         comment.setPromptText("Комментарий");
-        comment.setPrefWidth(280);
-        grid.add(comment, 1, 2);
+        comment.setPrefWidth(400);
+        grid.add(comment, 0, 2);
 
         Button btn = new Button("Добавить");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                Comment commentEntity = model.addComment(name.getText(), comment.getText());
-                name.setText("");
+                MyUserDetail user = (MyUserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                Comment commentEntity = model.addComment(user.getUserEntity().getUsername(), comment.getText());
                 comment.setText("");
                 data.add(commentEntity);
             }
         });
-        grid.add(btn, 2, 2);
+        grid.add(btn, 1, 2);
         changeView(grid);
     }
 
@@ -108,13 +109,13 @@ public class MainController implements DialogController {
         listView.setPrefWidth(1000);
         listView.setItems(data);
         grid.add(listView, 0, 1);
-
         changeView(grid);
     }
 
     @FXML
     public void cancel() {
         dialog.close();
+        screens.loginDialog().show();
     }
 
     private void changeView(Node node) {

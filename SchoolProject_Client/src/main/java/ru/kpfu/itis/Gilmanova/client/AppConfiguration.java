@@ -20,7 +20,7 @@ import java.util.Collections;
 @Import(ScreensConfiguration.class)
 @ImportResource("classpath:applicationContext-security.xml")
 public class AppConfiguration {
-    @Bean
+    @Bean(name="model")
     CommentModel commentModel() throws IOException {
         CommentModel commentModel = new CommentModel();
         commentModel.setRestTemplate(restTemplate());
