@@ -1,5 +1,6 @@
 package ru.kpfu.itis.Gilmanova.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -58,4 +59,7 @@ public class LoginController implements DialogController {
         screens.addMenu().show();
     }
 
+    public void exit(ActionEvent actionEvent) {
+        dialog.close();
+    }
 }

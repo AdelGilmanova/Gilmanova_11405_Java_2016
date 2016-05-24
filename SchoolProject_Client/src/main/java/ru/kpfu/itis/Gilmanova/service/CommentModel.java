@@ -9,7 +9,6 @@ import ru.kpfu.itis.Gilmanova.model.User;
 /**
  * Created by Adel on 18.05.2016.
  */
-
 public class CommentModel {
     private ObservableList<Comment> comments = FXCollections.observableArrayList();
     private RestTemplate restTemplate;

@@ -17,7 +17,7 @@
                 </font>
             </Label>
         </StackPane>
-
+        <Button onAction="#exit" text="X"/>
         <GridPane fx:id="gridPane" AnchorPane.topAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
            <children>
                 <Label text="Имя пользователя" prefWidth="200"
